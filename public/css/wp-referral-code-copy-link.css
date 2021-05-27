@@ -1,0 +1,164 @@
+.tooltip {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+/*.tooltip:hover .tooltiptext {
+    visibility: visible;
+}*/
+.tooltip-visible {
+    visibility: visible !important;
+}
+
+#copy-btn {
+    font-family: "Font Awesome 5 Free" !important;
+    height: 50px;
+
+    position: relative;
+    display: inline-block;
+    font-size: 1.5em;
+    font-weight: 700;
+    line-height: 20px;
+    color: #333;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #eee;
+    background-image: linear-gradient(#fcfcfc, #eee);
+    border: 1px solid #d5d5d5;
+    border-radius: 0 3px 3px 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-appearance: none;
+}
+
+#copy-btn:hover {
+    color: #3f3f3f;
+}
+
+input#ref_link {
+    flex-grow: 1;
+    height: 50px;
+    color: #696969;
+    background: #fff;
+    border: 1px solid #d2d2d2;
+    border-radius: 3px 0 0 3px;
+    position: relative;
+    text-align: left;
+    padding-left: 8px;
+    transition: opacity .5s;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .075);
+    font-size: 1em;
+}
+
+/* new styles *?
+
+<div class="tooltip">
+	<button id="copy-btn" class="btn fas fa-copy" data-clipboard-target="#ref_link">
+<input id="ref_link" readonly value="<?php
+echo esc_url($ref_code->get_ref_link()) ?>">
+<span class="tooltiptext">Tooltip text</span>
+                                        </button>
+                                          </div>
+
+
+ */
+
+.input-group input, .input-group-button {
+    display: table-cell;
+}
+
+.input-group input {
+    position: relative;
+    width: 100%;
+}
+
+input, select, textarea, button {
+    font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+input {
+    line-height: normal;
+}
+
+button, input, optgroup, select, textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+
+.input-group {
+    display: table;
+}
+
+.input-group-button {
+    width: 1%;
+    vertical-align: middle;
+}
+
+.input-group input, .input-group-button {
+    display: table-cell;
+}
+
+.input-group-button:last-child .btn {
+    margin-left: -1px;
+}
+
+.coping-btn {
+    position: relative;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #333;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #eee;
+    background-image: linear-gradient(#fcfcfc, #eee);
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-appearance: none;
+}
+
+.coping-btn img {
+    width: 36px;
+    height: 36px;
+    display: inline;
+    max-width: none;
+}
