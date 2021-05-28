@@ -76,6 +76,20 @@ function wp_referral_code_add_user_to_referrer_invite_list( $user_id, $referrer_
 	}
 }
 
+if ( ! function_exists( 'wp_referral_code_delete_relation' ) ) {
+	function wp_referral_code_delete_relation( $to_delete_user_id, $referrer_id ) {
+		$users_referred_by_referrer = get_user_meta( $referrer_id, 'wrc_invited_users', true );
+		if ( empty( $users_referred_by_referrer ) ) {
+			return;
+		}
+		$users_referred_by_referrer = array_diff( $users_referred_by_referrer, [ $to_delete_user_id ] );
+		$users_referred_by_referrer = array_unique( $users_referred_by_referrer );
+		update_user_meta( $referrer_id, 'wrc_invited_users', $users_referred_by_referrer );
+		update_user_meta( $to_delete_user_id, 'wrc_referrer_id', null );
+	}
+}
+
+
 if ( ! function_exists( 'wrc_set_cookie' ) ) {
 
 	function wrc_set_cookie( $name, $value, $expire = 0 ) {

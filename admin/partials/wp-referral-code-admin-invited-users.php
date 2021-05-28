@@ -29,15 +29,25 @@
 				if ( empty( $invited_users_ids ) ) {
 					_e( 'this user has invited 0 users', 'wp-referral-code' );
 				} else {
-					foreach ( $invited_users_ids as $invited_user_id ): ?>
-                        <li class="therapist-item item" id="<?php echo $invited_user_id ?>">
-							<?php
-							$invited_user = new WP_User( $invited_user_id );
-							echo '<a href="' . admin_url( '/user-edit.php?user_id=' . $invited_user_id ) . '" target="_blank">' . $invited_user->get( 'first_name' ) . " " . $invited_user->get( 'last_name' ) . " | id:" . $invited_user->ID . '</a>';
-							?>
+				?>
+                <h4>This user has invited following users: </h4>
+                <ul class="wp-referral-code-invited-users">
+		            <?php
+		            foreach ( $invited_users_ids as $invited_user_id ): ?>
+                        <li class="invited-user-item item" id="<?php echo $invited_user_id ?>">
+				            <?php
+				            $invited_user = new WP_User( $invited_user_id );
+				            echo '<a href="' . admin_url( '/user-edit.php?user_id=' . $invited_user_id ) . '" target="_blank">' . $invited_user->get( 'first_name' ) . " " . $invited_user->get( 'last_name' ) . "($invited_user->user_login)" . '</a>';
+				            ?>
+                            <button style="background-color: #dd382d; border-color: #dd382d"
+                                    class="wrc-remove-relation button button-small button-primary delete-permanently"
+                                    data-referrer-id="<?php esc_attr_e( $user_id ); ?>"
+                                    data-user-id="<?php esc_attr_e( $invited_user_id ); ?>">Remove
+                            </button>
                         </li>
-					<?php endforeach;
-				} ?>
+		            <?php endforeach;
+		            } ?>
+                </ul>
             </ul>
         </td>
     </tr>

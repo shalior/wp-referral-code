@@ -1,0 +1,34 @@
+{
+  "name": "wp-referral-code",
+  "version": "1.1.1",
+  "homepage": "https://shalior.ir",
+  "description": "\"this plugin brings referral codes to your wordpress website. many shortcodes are available and its all free\"",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shalior/wp-referral-code.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shalior/wp-referral-code/issues"
+  },
+  "scripts": {
+    "watch": "webpack -w",
+    "build": "webpack",
+    "bundle": "dir-archiver --src . --dest ../wp-referral-code.zip --exclude .gitignore package.json node_modules"
+  },
+  "devDependencies": {
+    "compression-webpack-plugin": "^8.0.0",
+    "dir-archiver": "^1.1.1",
+    "webpack": "^5.38.0",
+    "webpack-cli": "^4.7.0"
+  },
+  "keywords": [
+    "WordPress",
+    "Plugin",
+    "WP Referral code"
+  ],
+  "author": "Shalior",
+  "license": "GPL-2.0-or-later",
+  "dependencies": {
+    "sweetalert2": "^11.0.12"
+  }
+}

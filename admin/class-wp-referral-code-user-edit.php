@@ -19,7 +19,7 @@ final class Shalior_Grs_User_Edit {
 	 * Sets up needed actions/filters for the admin to initialize.
 	 *
 	 * @return void
-	 * @since  2.0.0
+	 * @since  1.0.0
 	 * @access public
 	 */
 	public function __construct() {
@@ -29,14 +29,42 @@ final class Shalior_Grs_User_Edit {
 		}
 		// Only run our customization on the 'user-edit.php' page in the admin.
 		add_action( 'load-user-edit.php', array( $this, 'load_user_edit' ) );
+		if ( is_admin() ) {
+			add_action( 'wp_ajax_wp_referral_code_delete_user_relation', [ $this, 'ajax_delete_user_relation' ] );
+		}
+	}
+
+	public function ajax_delete_user_relation() {
+		$data              = wp_unslash( $_POST );
+		$to_delete_user_id = sanitize_text_field( $data['user_id'] );
+		$referrer_id       = sanitize_text_field( $data['referrer_id'] );
+
+		if ( ! is_numeric( $to_delete_user_id ) || ! ( new WP_User( $to_delete_user_id ) ) || ! ( new WP_User( $referrer_id ) ) ) {
+			wp_send_json_error( [
+				'Invalid data'
+				,
+				$referrer_id,
+				$to_delete_user_id
+			], 422 );
+		}
+
+		check_ajax_referer( 'wp_referral_code_delete_user_relation_nonce', 'nonce', true );
+
+		wp_referral_code_delete_relation( $to_delete_user_id, $referrer_id );
+		wp_send_json_success( [
+			'done',
+			$referrer_id,
+			$to_delete_user_id
+		] );
+
 	}
 
 	/**
 	 * Returns the instance.
 	 *
-	 * @since  2.0.0
-	 * @access public
 	 * @return object
+	 * @since  1.0.0
+	 * @access public
 	 */
 	public static function get_instance() {
 
@@ -50,34 +78,50 @@ final class Shalior_Grs_User_Edit {
 	/**
 	 * Adds actions/filters on load.
 	 *
-	 * @since  2.0.0
-	 * @access public
 	 * @return void
+	 * @since  1.0.0
+	 * @access public
 	 */
 	public function load_user_edit() {
 		add_action( 'show_user_profile', array( $this, 'profile_fields' ), 1 );
 		add_action( 'edit_user_profile', array( $this, 'profile_fields' ), 1 );
+		wp_enqueue_script( 'wp-referral-code-main', WP_REFERRAL_CODE_URI . '/admin/js/main.min.js' );
+		wp_localize_script( 'wp-referral-code-main', 'WPReferralCode', [
+			'alert'          => [
+				'title'       => __( 'Are you sure?' ),
+				'text'        => __( 'You won\'t be able to revert this!' ),
+				'confirmText' => __( 'Yes, delete it!' ),
+				'cancelText'  => __( 'Cancel' ),
+			],
+			'confirmedAlert' => [
+				'title' => 'Deleted!',
+				'text'  => 'The relation has been deleted.'
+			],
+			'nonce'          => wp_create_nonce( 'wp_referral_code_delete_user_relation_nonce' )
+		] );
 
 	}
 
 	/**
 	 * Adds custom profile fields.
 	 *
-	 * @since  2.0.0
-	 * @access public
-	 *
 	 * @param WP_User $user
 	 *
 	 * @return void
+	 * @since  1.0.0
+	 * @access public
+	 *
 	 */
 	public function profile_fields( $user ) {
 
 		if ( ! current_user_can( 'promote_users' ) || ! current_user_can( 'edit_user', $user->ID ) ) {
 			return;
 		}
-		$ref_code = new WP_Refer_Code( $user->ID );
+		$user_id  = $user->ID;
+		$ref_code = new WP_Refer_Code( $user_id );
+
 		ob_start();
-		include_once 'partials/wp-referral-code-admin-invited-users.php';
+		include_once WP_REFERRAL_CODE_PATH . '/admin/partials/wp-referral-code-admin-invited-users.php';
 		echo ob_get_clean();
 
 	}
