@@ -27,6 +27,8 @@ export default class DeleteHandler {
                         failCallback(response);
                     }
                 }).fail(this.onRequestFailure);
+            } else {
+                failCallback({event: "canceled"})
             }
         });
 

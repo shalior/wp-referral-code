@@ -24,10 +24,9 @@ export default class AjaxButton {
 	}
 
 	loading(text) {
-		this.button.text(text);
-		// this.button.prepend(' Deleting... ');
+		this.button.html(text);
+		this.button.prepend('<span class="spinner is-active"></span>');
 		return this;
-
 	}
 
 	/**
