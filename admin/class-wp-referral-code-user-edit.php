@@ -88,14 +88,14 @@ final class Shalior_Grs_User_Edit {
 		wp_enqueue_script( 'wp-referral-code-main', WP_REFERRAL_CODE_URI . '/admin/js/main.min.js' );
 		wp_localize_script( 'wp-referral-code-main', 'WPReferralCode', [
 			'alert'          => [
-				'title'       => __( 'Are you sure?' ),
-				'text'        => __( 'You won\'t be able to revert this!' ),
-				'confirmText' => __( 'Yes, delete it!' ),
-				'cancelText'  => __( 'Cancel' ),
+				'title'       => __( 'Are you sure?', 'wp-referral-code' ),
+				'text'        => __( 'You won\'t be able to revert this!', 'wp-referral-code' ),
+				'confirmText' => __( 'Yes, delete it!', 'wp-referral-code' ),
+				'cancelText'  => __( 'Cancel', 'wp-referral-code' ),
 			],
 			'confirmedAlert' => [
-				'title' => 'Deleted!',
-				'text'  => 'The relation has been deleted.'
+				'title' => __( 'Deleted!', 'wp-referral-code' ),
+				'text'  => __( 'The relation has been deleted.', 'wp-referral-code' )
 			],
 			'nonce'          => wp_create_nonce( 'wp_referral_code_delete_user_relation_nonce' )
 		] );
