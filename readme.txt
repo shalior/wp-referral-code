@@ -2,7 +2,7 @@
 Contributors: shalior
 Tags: refer code, referral marketing, refer
 Requires at least: 4.8
-Tested up to: 5.7
+Tested up to: 5.8
 Requires PHP: 5.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -26,6 +26,15 @@ note: on activation plugin will create refer codes for all of your users.
 2. Copy link shortcode example
 
 == Changelog ==
+
+= 1.3.0 =
+* new feature which allows setting custom refer code for users, See the new filed in edit user page
+
+= 1.2.1 =
+* show referral data in users table
+
+= 1.2.0 =
+* new feature to remove referral relation in user edit admin page
 
 = 1.1.1 =
 * update tested up to version: 5.7

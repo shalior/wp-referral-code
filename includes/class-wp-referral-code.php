@@ -67,7 +67,7 @@ class WP_Referral_Code {
 		$this->define_public_hooks();
 
 		//init
-		add_action( 'template_redirect', [ $this, 'init' ], 1 );
+		add_action( 'init', [ $this, 'init' ], 1 );
 
 		$this->options = get_option( 'wp_referral_code_options', [
 			'code_length'     => 5,
@@ -102,7 +102,6 @@ class WP_Referral_Code {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/helpers/bootstrap.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-referral-code-admin.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-referral-code-public.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-referral-code-admin.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/WP_Refer_Code.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/wp-referral-code-registration.php';
 	}
