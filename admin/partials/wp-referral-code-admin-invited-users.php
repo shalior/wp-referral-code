@@ -14,10 +14,10 @@
 				$referrer_id = $ref_code->get_referrer_id();
 				if ( ! empty( $referrer_id ) ) {
 					echo '<a href="' . admin_url( '/user-edit.php?user_id=' . $referrer_id ) . '" target="_blank">';
-					_e( 'this user has been invited by', 'wp-referral-code' );
-					echo get_user_meta( $referrer_id, 'first_name', true ) . " " .
+					_e( 'this user has been invited by ', 'wp-referral-code' );
+					echo '<strong class="text-lg">'.get_user_meta( $referrer_id, 'first_name', true ) . " " .
 					     get_user_meta( $referrer_id, 'last_name', true ) .
-					     '</a><br><hr>';
+					     '</strong></a><br><hr>';
 				} else {
 					_e( 'No one invited this user <br><hr>', 'wp-referral-code' );
 				}

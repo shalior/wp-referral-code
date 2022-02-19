@@ -52,7 +52,7 @@ final class WP_Referral_Code_Settings {
 		add_action( 'admin_init', [ $this, 'settings_init' ] );
 		add_action( 'admin_menu', [ $this, 'add_options_page' ] );
 
-		//get options
+		// get options
 	}
 
 	/**
@@ -60,7 +60,7 @@ final class WP_Referral_Code_Settings {
 	 */
 	public function field_code_length( $args ) {
 		$option = $this->options;
-		//include html
+		// include html
 		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/field_code_length.php';
 	}
 
@@ -144,16 +144,16 @@ final class WP_Referral_Code_Settings {
 
 		$have_err = false;
 
-		//check if the data has changed
+		// check if the data has changed
 		if ( $this->options == $data ) {
 			return $data;
 		}
-		//validate code_length
+		// validate code_length
 		if ( ! ( $data['code_length'] >= 3 && $data['code_length'] <= 10 && is_numeric( $data['code_length'] ) ) ) {
 			add_settings_error( $this->page_slug, $this->page_slug, __( 'Chose a number between 3 & 10', 'wp-referral-code' ) );
 			$have_err = true;
 		}
-		//validate register_url
+		// validate register_url
 		if ( wrc_is_valid_url( $data['register_url'] ) === false ) {
 			add_settings_error( $this->page_slug, $this->page_slug, __( 'Register Url is not valid', 'wp-referral-code' ) );
 			$have_err = true;
@@ -166,12 +166,12 @@ final class WP_Referral_Code_Settings {
 
 
 		if ( ! $have_err ) {
-			//reset ref codes if no err found and code_length value has changed
+			// reset ref codes if no err found and code_length value has changed
 			if ( $this->options['code_length'] != $data['code_length'] ) {
 				wrc_set_ref_code_all_users( true, $data['code_length'] );
 			}
 
-			//sanitize
+			// sanitize
 			$data['code_length']     = sanitize_text_field( $data['code_length'] );
 			$data['register_url']    = esc_url_raw( $data['register_url'] );
 			$data['expiration_time'] = sanitize_text_field( $data['expiration_time'] );
@@ -197,9 +197,10 @@ final class WP_Referral_Code_Settings {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		//settings_errors( $this->page_slug );
+
 		require_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/wp-referral-code-admin-setting-view.php';
 	}
 
 }
+
 WP_Referral_Code_Settings::get_instance();

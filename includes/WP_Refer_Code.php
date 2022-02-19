@@ -1,4 +1,5 @@
 <?php
+
 /**
  * this class is responsible for assigning ref code to user and
  * get refer code related data
@@ -69,6 +70,16 @@ class WP_Refer_Code {
 			update_user_meta( $this->user_id, 'wrc_ref_code', $ref_code );
 		}
 
+	}
+
+	public function update_ref_code( $ref_code ) {
+		if ( metadata_exists( 'user', $this->user_id, 'wrc_ref_code' ) ) {
+			$this->ref_code = $ref_code;
+
+			return update_user_meta( $this->user_id, 'wrc_ref_code', $ref_code );
+		}
+
+		return false;
 	}
 
 	/**
