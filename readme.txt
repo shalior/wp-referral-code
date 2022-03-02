@@ -27,6 +27,9 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.3.1 =
+* Fix a bug related to updating/setting custom refer codes
+
 = 1.3.0 =
 * new feature which allows setting custom refer code for users, See the new filed in edit user page
 

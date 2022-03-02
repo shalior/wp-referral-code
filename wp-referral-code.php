@@ -11,7 +11,7 @@
  * Plugin Name:       WP Referral Code
  * Plugin URI:        http://shalior.ir/wp-referral-code
  * Description:       this plugin brings referral codes to your wordpress website. many shortcodes are available and its all free
- * Version:           1.3.0
+ * Version:           1.3.1
  * Author:            Shalior <contact@shalior.ir>
  * Author URI:        http://shalior.ir/
  * License:           GPL-2.0+
@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 //holds the plugin path
 define( 'WP_REFERRAL_CODE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_REFERRAL_CODE_URI', plugin_dir_url( __FILE__ ) );
-define( 'WP_REFERRAL_CODE_VERSION', '1.3.0' );
+define( 'WP_REFERRAL_CODE_VERSION', '1.3.1' );
 
 /**
  * The code that runs during plugin activation.

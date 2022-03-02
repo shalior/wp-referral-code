@@ -101,8 +101,9 @@ final class Shalior_Grs_User_Edit {
 	 */
 	public function validate_ref_code( &$errors, $update, &$user ) {
 		if ( $update ) {
-			$new_ref_code = sanitize_text_field( wp_unslash( $_POST['wrc_new_ref_code'] ) );
-			if ( ! empty( $new_ref_code ) && WP_Refer_Code::get_user_id_by_ref_code( $new_ref_code ) ) {
+			$new_ref_code      = sanitize_text_field( wp_unslash( $_POST['wrc_new_ref_code'] ) );
+			$ref_code_owner_id = WP_Refer_Code::get_user_id_by_ref_code( $new_ref_code );
+			if ( ! empty( $new_ref_code ) && $ref_code_owner_id !== false && $ref_code_owner_id != $user->ID ) {
 				$errors->add( 'unique-ref-code', __( 'Submitted refer code is already in use', 'wp-referral-code' ) );
 			}
 		}
