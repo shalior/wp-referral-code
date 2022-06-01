@@ -3,6 +3,8 @@
 
     <description>WP Referral Code sniff rules</description>
 
+    <file>.</file>
+
     <!-- Exclude the Composer Vendor directory. -->
     <exclude-pattern>/vendor/*</exclude-pattern>
 
@@ -11,6 +13,10 @@
 
     <!-- Exclude minified Javascript files. -->
     <exclude-pattern>*.min.js</exclude-pattern>
+
+    <!-- Exclude index.php files. -->
+    <exclude-pattern>*/index.php</exclude-pattern>
+    <exclude-pattern>*/bootstrap.php</exclude-pattern>
 
     <!-- Show progress, show the error codes for each message (source). -->
     <arg value="ps" />
@@ -33,12 +39,21 @@
         The below two examples just show how you can exclude rules.
         They are not intended as advice about which sniffs to exclude.
         -->
-        <exclude name="Squiz.Commenting.FileComment.Missing"/>
 
         <!--
         <exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
         <exclude name="WordPress.Security.EscapeOutput"/>
         -->
+    </rule>
+
+
+    <rule ref="Squiz.Commenting">
+        <exclude name="Squiz.Commenting.LongConditionClosingComment" />
+        <exclude name="Squiz.Commenting.PostStatementComment" />
+        <exclude name="Squiz.Commenting.FileComment.Missing"/>
+        <exclude name="Squiz.Commenting.VariableComment.Missing"/>
+        <exclude name="Squiz.Commenting.FunctionComment.Missing"/>
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment" />
     </rule>
 
     <!-- Let's also check that everything is properly documented. -->
@@ -57,10 +72,8 @@
     For more information, also see:
     https://github.com/PHPCompatibility/PHPCompatibility
     -->
-    <!--
-    <config name="testVersion" value="5.2-"/>
+    <config name="testVersion" value="5.6-"/>
     <rule ref="PHPCompatibilityWP"/>
-    -->
 
     <!--
     For information on additional custom properties available, check out
@@ -80,6 +93,14 @@
     <rule ref="WordPress.Files.FileName">
         <properties>
             <property name="strict_class_file_names" value="false"/>
+        </properties>
+    </rule>
+
+    <rule ref="WordPress.PHP.DevelopmentFunctions">
+        <properties>
+            <property name="exclude" type="array">
+                <element value="error_log"/>
+            </property>
         </properties>
     </rule>
 

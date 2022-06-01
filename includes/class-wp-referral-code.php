@@ -66,7 +66,6 @@ class WP_Referral_Code {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
-		// init
 		add_action( 'init', array( $this, 'init' ), 1 );
 
 		$this->options = get_option(
@@ -81,8 +80,9 @@ class WP_Referral_Code {
 
 
 	/**
+	 * Returns an instance of the class
+	 *
 	 * @return WP_Referral_Code
-	 * returns an instance of the class
 	 */
 	public static function get_instance() {
 
@@ -96,8 +96,6 @@ class WP_Referral_Code {
 	/**
 	 * Load the required dependencies for this plugin.
 	 *
-	 * with WordPress.
-	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
@@ -105,7 +103,7 @@ class WP_Referral_Code {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/helpers/bootstrap.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-referral-code-admin.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-referral-code-public.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/WP_Refer_Code.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-refer-code.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/wp-referral-code-registration.php';
 	}
 
@@ -117,9 +115,7 @@ class WP_Referral_Code {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-
 		$plugin_admin = new WP_Referral_Code_Admin( $this->get_wp_referral_code(), $this->get_version() );
-
 	}
 
 	/**
@@ -153,18 +149,17 @@ class WP_Referral_Code {
 	 */
 	private function define_public_hooks() {
 		$plugin_public = new WP_Referral_Code_Public( $this->get_wp_referral_code(), $this->get_version() );
-
 	}
 
 
 	/**
-	 * handles initiation of plugin
-	 * sets cookies if request has a ref code
+	 * Handles initiation of plugin
+	 * Sets cookies if request has a ref code
 	 *
 	 * @return void
 	 */
 	public function init() {
-
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
 		if ( ! isset( $_GET[ wrc_get_ref_code_query() ] ) ) {
 			return;
 		}
@@ -173,6 +168,7 @@ class WP_Referral_Code {
 		$refer_code = sanitize_text_field( wp_unslash( $_GET[ wrc_get_ref_code_query() ] ) );
 		$expires    = isset( $this->options['expiration_time'] ) ? ( $this->options['expiration_time'] * HOUR_IN_SECONDS ) : ( 10 * HOUR_IN_SECONDS );
 		wrc_set_cookie( $name, $refer_code, time() + $expires );
+		// phpcs:enable
 	}
 
 }

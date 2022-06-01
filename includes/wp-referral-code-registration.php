@@ -1,5 +1,12 @@
 <?php
 add_action( 'user_register', 'wp_referral_code_handle_new_registration', 20, 1 );
+/**
+ * Save referral data of newly registered user
+ *
+ * @param int $user_id User's id.
+ *
+ * @return void
+ */
 function wp_referral_code_handle_new_registration( $user_id ) {
 	$ref_code = '';
 	if ( isset( $_COOKIE['refer_code'] ) ) {
@@ -10,17 +17,17 @@ function wp_referral_code_handle_new_registration( $user_id ) {
 
 	$new_user_id = $user_id;
 
-	// makes ref code for new users
+	// make ref code for new users.
 	$new_user_ref_code = new WP_Refer_Code( $new_user_id );
 
-	// out if no ref code
+	// out if no ref code.
 	if ( empty( $ref_code ) ) {
 		return;
 	}
 
 	$referrer_user_id = WP_Refer_Code::get_user_id_by_ref_code( $ref_code );
 
-	// if quite if ref_code is invalid
+	// if quite if the ref_code is invalid.
 	if ( false === $referrer_user_id ) {
 		if ( isset( $_COOKIE['refer_code'] ) ) {
 			wrc_set_cookie( 'refer_code', 0, time() - HOUR_IN_SECONDS );
@@ -32,7 +39,7 @@ function wp_referral_code_handle_new_registration( $user_id ) {
 
 	/*
 	 * fires before refer code related information are submitted on database
-	 * this action wont run if ref code does'nt exist
+	 * this action won't run if ref code doesn't exist
 	 * passed parameters:
 	 * $new_user_id: id of newly registered user
 	 * $referrer_user_id: id of the user who referred newly registered user (the guy who should be rewarded :) )
@@ -45,14 +52,14 @@ function wp_referral_code_handle_new_registration( $user_id ) {
 		return;
 	}
 
-	// set referrer as inviter of new user
+	// set referrer as inviter of new user.
 	update_user_meta( $new_user_id, 'wrc_referrer_id', $referrer_user_id );
 
-	// adding new user to referrer invited list
+	// adding new user to referrer invited list.
 	wp_referral_code_add_user_to_referrer_invite_list( $new_user_id, $referrer_user_id );
-	/*
-	 * fires after refer code related information are submitted on database
-	 * this action wont run if ref code does'nt exist
+	/**
+	 * Fires after refer code related information are submitted on database
+	 * this action won't run if ref code doesn't exist
 	 * passed parameters:
 	 * $new_user_id: id of newly registered user
 	 * $referrer_user_id: id of the user who referred newly registered user (the guy who should be rewarded :) )
@@ -61,7 +68,7 @@ function wp_referral_code_handle_new_registration( $user_id ) {
 	 */
 	do_action( 'wp_referral_code_after_refer_submitted', $new_user_id, $referrer_user_id, $ref_code, $new_user_ref_code );
 
-	// remove cookie
+	// remove cookie.
 	if ( isset( $_COOKIE['refer_code'] ) ) {
 		wrc_set_cookie( 'refer_code', 0, time() - HOUR_IN_SECONDS );
 		unset( $_COOKIE['refer_code'] );

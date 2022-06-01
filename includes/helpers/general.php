@@ -1,5 +1,5 @@
 <?php
-// If this file is called directly, abort.
+
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
@@ -27,7 +27,7 @@ function wrc_is_valid_url( $url ) {
 }
 
 /**
- * returns ref query holder: default is 'ref
+ * Returns ref query holder: default is 'ref
  * url example: https://domain.com/register/?=ref=324rf4
  *
  * @return string
@@ -38,8 +38,8 @@ function wrc_get_ref_code_query() {
 
 
 /**
- * sets ref code for all users. if refresh is true all user will get new code
- * if refresh if false only users will get a ref code who do not have one already
+ * Sets ref code for all users. if refresh is true all user will get new code
+ * if refresh false only users will get a ref code who do not have one already
  *
  * @param bool $refresh
  *
@@ -54,11 +54,11 @@ function wrc_set_ref_code_all_users( $refresh = false, $length ) {
 	foreach ( $users as $user ) {
 		$user_id = $user->ID;
 		if ( $refresh ) {
-			$ref_code = Shalior_Referral_Code_Generator::getInstance()->get_ref_code( $length );
+			$ref_code = Shalior_Referral_Code_Generator::get_instance()->get_ref_code( $length );
 			update_user_meta( $user_id, 'wrc_ref_code', $ref_code );
 		} else {
 			if ( ! metadata_exists( 'user', $user_id, 'wrc_ref_code' ) ) {
-				$ref_code = Shalior_Referral_Code_Generator::getInstance()->get_ref_code( $length );
+				$ref_code = Shalior_Referral_Code_Generator::get_instance()->get_ref_code( $length );
 				update_user_meta( $user_id, 'wrc_ref_code', $ref_code );
 			}
 		}
@@ -95,24 +95,13 @@ if ( ! function_exists( 'wp_referral_code_delete_relation' ) ) {
 if ( ! function_exists( 'wrc_set_cookie' ) ) {
 
 	function wrc_set_cookie( $name, $value, $expire = 0 ) {
-		// todo: test on https and http
 		if ( ! headers_sent() ) {
 			setcookie( $name, $value, $expire, COOKIEPATH ? COOKIEPATH : '/', COOKIE_DOMAIN, is_ssl(), true );
 		} elseif ( true === WP_DEBUG ) {
+			// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 			trigger_error( "{$name} cookie cannot be set headers already sent.", E_USER_NOTICE );
+			// phpcs:enable
 		}
 	}
 }
 
-if ( ! function_exists( 'write_log' ) ) {
-
-	function write_log( $log ) {
-		if ( true === WP_DEBUG ) {
-			if ( is_array( $log ) || is_object( $log ) ) {
-				error_log( print_r( $log, true ) );
-			} else {
-				error_log( $log );
-			}
-		}
-	}
-}

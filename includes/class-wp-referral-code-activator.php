@@ -13,12 +13,11 @@
 class WP_Referral_Code_Activator {
 
 	/**
-	 * sets a ref code meta for all users if they don't have any
+	 * Sets a ref code meta for all users if they don't have any
 	 *
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-		// sets ref code for all users.
 		wrc_set_ref_code_all_users( false, 6 );
 	}
 
