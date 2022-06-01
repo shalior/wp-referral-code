@@ -33,6 +33,7 @@
         The below two examples just show how you can exclude rules.
         They are not intended as advice about which sniffs to exclude.
         -->
+        <exclude name="Squiz.Commenting.FileComment.Missing"/>
 
         <!--
         <exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
