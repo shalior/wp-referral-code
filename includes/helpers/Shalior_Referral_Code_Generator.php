@@ -4,6 +4,7 @@
  * User: user
  * Date: 01-Feb-20
  * Time: 2:35 PM
+ *
  * @property  instance
  */
 
@@ -25,8 +26,7 @@ class Shalior_Referral_Code_Generator {
 	 *
 	 * @return string
 	 */
-	public function
-	get_ref_code(
+	public function get_ref_code(
 		$length = null
 	) {
 
@@ -47,7 +47,6 @@ class Shalior_Referral_Code_Generator {
 			}
 		} while ( ! $validated );
 
-
 		return $ref_code;
 	}
 
@@ -64,20 +63,22 @@ class Shalior_Referral_Code_Generator {
 		$encoded = base64_encode( $bytes );
 
 		// remove the chars we don't want
-		$stripped = substr( strtolower( str_replace( [ '=', '+', '/' ], '', $encoded ) ), 0, $length );
+		$stripped = substr( strtolower( str_replace( array( '=', '+', '/' ), '', $encoded ) ), 0, $length );
 
 		// format the final referral code
 		return $stripped;
 	}
 
 	private function isUnique( $ref_code ) {
-		$user = get_users( [
-			'meta_key'     => 'wrc_ref_code',
-			'meta_value'   => $ref_code,
-			'meta_compare' => '=',
-			/*			'meta_type'    => 'BINARY',*/
-			'fields'       => 'ids'
-		] );
+		$user = get_users(
+			array(
+				'meta_key'     => 'wrc_ref_code',
+				'meta_value'   => $ref_code,
+				'meta_compare' => '=',
+				/*			'meta_type'    => 'BINARY',*/
+				'fields'       => 'ids',
+			)
+		);
 		if ( count( $user ) > 0 ) {
 			return false;
 		}

@@ -66,14 +66,17 @@ class WP_Referral_Code {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
-		//init
-		add_action( 'init', [ $this, 'init' ], 1 );
+		// init
+		add_action( 'init', array( $this, 'init' ), 1 );
 
-		$this->options = get_option( 'wp_referral_code_options', [
-			'code_length'     => 5,
-			'register_url'    => wp_registration_url(),
-			'expiration_time' => 10,
-		] );
+		$this->options = get_option(
+			'wp_referral_code_options',
+			array(
+				'code_length'     => 5,
+				'register_url'    => wp_registration_url(),
+				'expiration_time' => 10,
+			)
+		);
 	}
 
 
@@ -84,7 +87,7 @@ class WP_Referral_Code {
 	public static function get_instance() {
 
 		if ( ! self::$instance ) {
-			self::$instance = new self;
+			self::$instance = new self();
 		}
 
 		return self::$instance;
@@ -144,6 +147,7 @@ class WP_Referral_Code {
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 * d
+	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
@@ -156,6 +160,7 @@ class WP_Referral_Code {
 	/**
 	 * handles initiation of plugin
 	 * sets cookies if request has a ref code
+	 *
 	 * @return void
 	 */
 	public function init() {

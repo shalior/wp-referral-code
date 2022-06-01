@@ -29,6 +29,7 @@ function wrc_is_valid_url( $url ) {
 /**
  * returns ref query holder: default is 'ref
  * url example: https://domain.com/register/?=ref=324rf4
+ *
  * @return string
  */
 function wrc_get_ref_code_query() {
@@ -42,7 +43,7 @@ function wrc_get_ref_code_query() {
  *
  * @param bool $refresh
  *
- * @param int $length
+ * @param int  $length
  *
  * @return void
  */
@@ -61,14 +62,13 @@ function wrc_set_ref_code_all_users( $refresh = false, $length ) {
 				update_user_meta( $user_id, 'wrc_ref_code', $ref_code );
 			}
 		}
-
 	}
 }
 
 function wp_referral_code_add_user_to_referrer_invite_list( $user_id, $referrer_id ) {
 	$users_referred_by_referrer = get_user_meta( $referrer_id, 'wrc_invited_users', true );
 	if ( empty( $users_referred_by_referrer ) ) {
-		update_user_meta( $referrer_id, 'wrc_invited_users', [ $user_id ] );
+		update_user_meta( $referrer_id, 'wrc_invited_users', array( $user_id ) );
 	} else {
 		$users_referred_by_referrer[] = $user_id;
 		$users_referred_by_referrer   = array_unique( $users_referred_by_referrer );
@@ -82,7 +82,7 @@ if ( ! function_exists( 'wp_referral_code_delete_relation' ) ) {
 		if ( empty( $users_referred_by_referrer ) ) {
 			return;
 		}
-		$users_referred_by_referrer = array_diff( $users_referred_by_referrer, [ $to_delete_user_id ] );
+		$users_referred_by_referrer = array_diff( $users_referred_by_referrer, array( $to_delete_user_id ) );
 		$users_referred_by_referrer = array_unique( $users_referred_by_referrer );
 		update_user_meta( $referrer_id, 'wrc_invited_users', $users_referred_by_referrer );
 		update_user_meta( $to_delete_user_id, 'wrc_referrer_id', null );
@@ -102,7 +102,6 @@ if ( ! function_exists( 'wrc_set_cookie' ) ) {
 			trigger_error( "{$name} cookie cannot be set headers already sent.", E_USER_NOTICE );
 		}
 	}
-
 }
 
 if ( ! function_exists( 'write_log' ) ) {
@@ -116,5 +115,4 @@ if ( ! function_exists( 'write_log' ) ) {
 			}
 		}
 	}
-
 }

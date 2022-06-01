@@ -1,7 +1,7 @@
 <?php
 
 /**
- * wordpress referral code
+ * WordPress referral code
  *
  * @link              http://shalior.ir
  * @since             1.1.1
@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:       WP Referral Code
  * Plugin URI:        http://shalior.ir/wp-referral-code
- * Description:       this plugin brings referral codes to your wordpress website. many shortcodes are available and its all free
+ * Description:       This plugin brings referral codes to your WordPress website. many shortcodes are available and its all free
  * Version:           1.3.1
  * Author:            Shalior <contact@shalior.ir>
  * Author URI:        http://shalior.ir/
@@ -24,7 +24,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-//holds the plugin path
+// holds the plugin path.
 define( 'WP_REFERRAL_CODE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_REFERRAL_CODE_URI', plugin_dir_url( __FILE__ ) );
 define( 'WP_REFERRAL_CODE_VERSION', '1.3.1' );
@@ -65,14 +65,17 @@ function run_wp_referral_code() {
 
 }
 
-//gets necessary options
-$wp_referral_code_options = get_option( 'wp_referral_code_options', [
-	'code_length'     => 6,
-	'register_url'    => wp_registration_url(),
-	'expiration_time' => 10,
-] );
+// gets necessary options.
+$wp_referral_code_options = get_option(
+	'wp_referral_code_options',
+	array(
+		'code_length'     => 6,
+		'register_url'    => wp_registration_url(),
+		'expiration_time' => 10,
+	)
+);
 
-//runs the plugin
+// runs the plugin.
 run_wp_referral_code();
 
 do_action( 'wp_referral_code_loaded' );

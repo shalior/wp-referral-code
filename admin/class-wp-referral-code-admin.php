@@ -46,7 +46,6 @@ class WP_Referral_Code_Admin {
 	 * @param string $version The version of this plugin.
 	 *
 	 * @since    1.0.0
-	 *
 	 */
 	public function __construct( $wp_referral_code, $version ) {
 

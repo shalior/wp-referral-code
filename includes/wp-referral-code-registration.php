@@ -10,10 +10,10 @@ function wp_referral_code_handle_new_registration( $user_id ) {
 
 	$new_user_id = $user_id;
 
-	//makes ref code for new users
+	// makes ref code for new users
 	$new_user_ref_code = new WP_Refer_Code( $new_user_id );
 
-	//out if no ref code
+	// out if no ref code
 	if ( empty( $ref_code ) ) {
 		return;
 	}
@@ -45,10 +45,10 @@ function wp_referral_code_handle_new_registration( $user_id ) {
 		return;
 	}
 
-	//set referrer as inviter of new user
+	// set referrer as inviter of new user
 	update_user_meta( $new_user_id, 'wrc_referrer_id', $referrer_user_id );
 
-	//adding new user to referrer invited list
+	// adding new user to referrer invited list
 	wp_referral_code_add_user_to_referrer_invite_list( $new_user_id, $referrer_user_id );
 	/*
 	 * fires after refer code related information are submitted on database

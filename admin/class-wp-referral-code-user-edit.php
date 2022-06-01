@@ -1,6 +1,7 @@
 <?php
 /**
  * Handles custom functionality on the edit user screen,
+ *
  * @package    WP Referral Code
  * @subpackage Admin
  * @author Shalior<contact@shalior.ir>
@@ -30,7 +31,7 @@ final class Shalior_Grs_User_Edit {
 		// Only run our customization on the 'user-edit.php' page in the admin.
 		add_action( 'load-user-edit.php', array( $this, 'load_user_edit' ) );
 		if ( is_admin() ) {
-			add_action( 'wp_ajax_wp_referral_code_delete_user_relation', [ $this, 'ajax_delete_user_relation' ] );
+			add_action( 'wp_ajax_wp_referral_code_delete_user_relation', array( $this, 'ajax_delete_user_relation' ) );
 		}
 	}
 
@@ -49,24 +50,28 @@ final class Shalior_Grs_User_Edit {
 		add_action( 'user_profile_update_errors', array( $this, 'validate_ref_code' ), 3, 10 );
 
 		wp_enqueue_script( 'wp-referral-code-main', WP_REFERRAL_CODE_URI . '/admin/js/main.min.js' );
-		wp_localize_script( 'wp-referral-code-main', 'WPReferralCode', [
-			'alert'          => [
-				'title'       => __( 'Are you sure?', 'wp-referral-code' ),
-				'text'        => __( 'You won\'t be able to revert this!', 'wp-referral-code' ),
-				'confirmText' => __( 'Yes, delete it!', 'wp-referral-code' ),
-				'cancelText'  => __( 'Cancel', 'wp-referral-code' ),
-			],
-			'confirmedAlert' => [
-				'title' => __( 'Deleted!', 'wp-referral-code' ),
-				'text'  => __( 'The relation has been deleted.', 'wp-referral-code' )
-			],
-			'nonce'          => wp_create_nonce( 'wp_referral_code_delete_user_relation_nonce' )
-		] );
+		wp_localize_script(
+			'wp-referral-code-main',
+			'WPReferralCode',
+			array(
+				'alert'          => array(
+					'title'       => __( 'Are you sure?', 'wp-referral-code' ),
+					'text'        => __( 'You won\'t be able to revert this!', 'wp-referral-code' ),
+					'confirmText' => __( 'Yes, delete it!', 'wp-referral-code' ),
+					'cancelText'  => __( 'Cancel', 'wp-referral-code' ),
+				),
+				'confirmedAlert' => array(
+					'title' => __( 'Deleted!', 'wp-referral-code' ),
+					'text'  => __( 'The relation has been deleted.', 'wp-referral-code' ),
+				),
+				'nonce'          => wp_create_nonce( 'wp_referral_code_delete_user_relation_nonce' ),
+			)
+		);
 
 	}
 
 	/**
-	 * @param int $user_id
+	 * @param int           $user_id
 	 * @param $old_user_data
 	 *
 	 * @return void
@@ -81,7 +86,6 @@ final class Shalior_Grs_User_Edit {
 			return;
 		}
 
-
 		$new_ref_code = sanitize_text_field( wp_unslash( $_POST['wrc_new_ref_code'] ) );
 
 		if ( empty( $new_ref_code ) ) {
@@ -94,8 +98,8 @@ final class Shalior_Grs_User_Edit {
 
 	/**
 	 * @param WP_Error $errors
-	 * @param boolean $update
-	 * @param WP_User $user
+	 * @param boolean  $update
+	 * @param WP_User  $user
 	 *
 	 * @return void
 	 */
@@ -115,22 +119,26 @@ final class Shalior_Grs_User_Edit {
 		$referrer_id       = sanitize_text_field( $data['referrer_id'] );
 
 		if ( ! is_numeric( $to_delete_user_id ) || ! ( new WP_User( $to_delete_user_id ) ) || ! ( new WP_User( $referrer_id ) ) ) {
-			wp_send_json_error( [
-				'Invalid data'
-				,
-				$referrer_id,
-				$to_delete_user_id
-			], 422 );
+			wp_send_json_error(
+				array(
+					'Invalid data',
+					$referrer_id,
+					$to_delete_user_id,
+				),
+				422
+			);
 		}
 
 		check_ajax_referer( 'wp_referral_code_delete_user_relation_nonce', 'nonce', true );
 
 		wp_referral_code_delete_relation( $to_delete_user_id, $referrer_id );
-		wp_send_json_success( [
-			'done',
-			$referrer_id,
-			$to_delete_user_id
-		] );
+		wp_send_json_success(
+			array(
+				'done',
+				$referrer_id,
+				$to_delete_user_id,
+			)
+		);
 
 	}
 
@@ -142,7 +150,6 @@ final class Shalior_Grs_User_Edit {
 	 * @return void
 	 * @since  1.0.0
 	 * @access public
-	 *
 	 */
 	public function profile_fields( $user ) {
 
@@ -169,7 +176,7 @@ final class Shalior_Grs_User_Edit {
 	public static function get_instance() {
 
 		if ( ! self::$instance ) {
-			self::$instance = new self;
+			self::$instance = new self();
 		}
 
 		return self::$instance;

@@ -44,11 +44,13 @@ class WP_Refer_Code {
 	 */
 	public static function get_user_id_by_ref_code( $ref_code ) {
 		/** @var WP_User $user */
-		$user = get_users( [
-			'meta_key'   => 'wrc_ref_code',
-			'meta_value' => $ref_code,
-			'fields'     => [ 'ID' ]
-		] );
+		$user = get_users(
+			array(
+				'meta_key'   => 'wrc_ref_code',
+				'meta_value' => $ref_code,
+				'fields'     => array( 'ID' ),
+			)
+		);
 
 		return ! empty( $user ) ? $user[0]->ID : false;
 	}
@@ -95,7 +97,7 @@ class WP_Refer_Code {
 	 */
 	public function get_ref_link() {
 		global $wp_referral_code_options;
-		$ref_link = add_query_arg( [ wrc_get_ref_code_query() => $this->ref_code ], $wp_referral_code_options['register_url'] );
+		$ref_link = add_query_arg( array( wrc_get_ref_code_query() => $this->ref_code ), $wp_referral_code_options['register_url'] );
 
 		return esc_url( $ref_link );
 	}
@@ -113,6 +115,6 @@ class WP_Refer_Code {
 		}
 		$invited = get_user_meta( $user_id, 'wrc_invited_users', true );
 
-		return empty( $invited ) ? [] : $invited;
+		return empty( $invited ) ? array() : $invited;
 	}
 }
