@@ -11,6 +11,8 @@
     "url": "https://github.com/shalior/wp-referral-code/issues"
   },
   "scripts": {
+    "phpcs:fix": "phpcbf -p .",
+    "phpcs": "phpcs -p -s .",
     "watch": "webpack -w",
     "build": "webpack",
     "bundle": "dir-archiver --src . --dest ../wp-referral-code.zip --exclude .gitignore package.json node_modules"

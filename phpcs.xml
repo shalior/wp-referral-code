@@ -12,6 +12,12 @@
     <!-- Exclude minified Javascript files. -->
     <exclude-pattern>*.min.js</exclude-pattern>
 
+    <!-- Show progress, show the error codes for each message (source). -->
+    <arg value="ps" />
+
+    <!-- Check up to 8 files simultaneously. -->
+    <arg name="parallel" value="8" />
+
     <rule ref="WordPress-Core"/>
 
     <!-- Include the WordPress-Extra standard. -->
