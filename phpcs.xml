@@ -4,15 +4,13 @@
     <description>WP Referral Code sniff rules</description>
 
     <file>.</file>
+    <arg name="extensions" value="php"/>
 
     <!-- Exclude the Composer Vendor directory. -->
     <exclude-pattern>/vendor/*</exclude-pattern>
 
     <!-- Exclude the Node Modules directory. -->
     <exclude-pattern>/node_modules/*</exclude-pattern>
-
-    <!-- Exclude Javascript files. -->
-    <exclude-pattern>*.js</exclude-pattern>
 
     <!-- Exclude index.php files. -->
     <exclude-pattern>*/index.php</exclude-pattern>
