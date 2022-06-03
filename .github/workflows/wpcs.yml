@@ -12,3 +12,4 @@ jobs:
           reporter: github-pr-review
           level: warning
           phpcs_standard: MySource
+          use_default_configuration_file: true
