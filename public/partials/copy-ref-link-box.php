@@ -14,7 +14,7 @@
 	echo esc_url( $ref_code->get_ref_link() )
 	?>
 	">
-		<img src="<?php echo esc_attr( plugins_url( '', __FILE__ ) . '/copy.png' ); ?>" alt="<?php esc_attr_e( 'Copy icon', 'wp-referral-code' ); ?>">
+		<img src="<?php echo esc_attr( plugins_url( '', __FILE__ ) . '/copy.png' ); ?>" alt="<?php esc_attr_e('Copy icon', 'wp-referral-code' ); ?>">
 	</button>
 
 	</span>
