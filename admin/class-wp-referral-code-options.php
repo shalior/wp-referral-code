@@ -57,19 +57,19 @@ final class WP_Referral_Code_Settings {
 	public function field_code_length( $args ) {
 		$option = $this->options;
 		// include html.
-		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/field_code_length.php';
+		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/field-code-length.php';
 	}
 
 	public function field_register_url( $args ) {
 		$option = $this->options;
 		// include html.
-		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/filed_register_url.php';
+		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/filed-register-url.php';
 	}
 
 	public function field_expiration_time( $args ) {
 		$option = $this->options;
 		// include html.
-		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/field_expiration_time.php';
+		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/field-expiration-time.php';
 	}
 
 	public function section_1( $args ) {

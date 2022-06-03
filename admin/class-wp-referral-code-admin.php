@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -56,7 +55,7 @@ class WP_Referral_Code_Admin {
 	}
 
 	/**
-	 * loads admin related dependencies
+	 * Loads admin related dependencies
 	 */
 	public function load_dependencies() {
 		require_once WP_REFERRAL_CODE_PATH . '/admin/class-wp-referral-code-user-edit.php';
