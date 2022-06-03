@@ -1,5 +1,5 @@
 name: WPCS checker
-on: [pull_request]
+on: push
 jobs:
   linter_name:
     name: runner / phpcs
