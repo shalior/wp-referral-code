@@ -30,9 +30,7 @@ final class Shalior_Grs_User_Edit {
 		}
 		// Only run our customization on the 'user-edit.php' page in the admin.
 		add_action( 'load-user-edit.php', array( $this, 'load_user_edit' ) );
-		if ( is_admin() ) {
-			add_action( 'wp_ajax_wp_referral_code_delete_user_relation', array( $this, 'ajax_delete_user_relation' ) );
-		}
+		add_action( 'wp_ajax_wp_referral_code_delete_user_relation', array( $this, 'ajax_delete_user_relation' ) );
 	}
 
 	/**
@@ -46,10 +44,10 @@ final class Shalior_Grs_User_Edit {
 		add_action( 'show_user_profile', array( $this, 'profile_fields' ), 1 );
 		add_action( 'edit_user_profile', array( $this, 'profile_fields' ), 1 );
 
-		add_action( 'profile_update', array( $this, 'update_ref_code' ), 10, 2 );
+		add_action( 'profile_update', array( $this, 'update_ref_code' ), 10, 1 );
 		add_action( 'user_profile_update_errors', array( $this, 'validate_ref_code' ), 3, 10 );
 
-		wp_enqueue_script( 'wp-referral-code-main', WP_REFERRAL_CODE_URI . '/admin/js/main.min.js' );
+		wp_enqueue_script( 'wp-referral-code-main', WP_REFERRAL_CODE_URI . '/admin/js/main.min.js', array(), WP_REFERRAL_CODE_VERSION, false );
 		wp_localize_script(
 			'wp-referral-code-main',
 			'WPReferralCode',
@@ -70,13 +68,7 @@ final class Shalior_Grs_User_Edit {
 
 	}
 
-	/**
-	 * @param int           $user_id
-	 * @param $old_user_data
-	 *
-	 * @return void
-	 */
-	public function update_ref_code( $user_id, $old_user_data ) {
+	public function update_ref_code( $user_id ) {
 
 		if ( ! current_user_can( 'promote_users' ) || ! current_user_can( 'edit_user', $user_id ) ) {
 			return;
@@ -97,22 +89,43 @@ final class Shalior_Grs_User_Edit {
 	}
 
 	/**
+	 * Validate submitted ref code
+	 *
 	 * @param WP_Error $errors
 	 * @param boolean  $update
 	 * @param WP_User  $user
 	 *
 	 * @return void
 	 */
-	public function validate_ref_code( &$errors, $update, &$user ) {
+	public function validate_ref_code( $errors, $update, $user ) {
 		if ( $update ) {
-			$new_ref_code      = sanitize_text_field( wp_unslash( $_POST['wrc_new_ref_code'] ) );
+			if ( ! isset( $_POST['wrc_update_ref_code_nonce'] ) || ! wp_verify_nonce( $_POST['wrc_update_ref_code_nonce'], 'update_ref_code' ) ) {
+				return;
+			}
+
+			$new_ref_code = sanitize_text_field( wp_unslash( $_POST['wrc_new_ref_code'] ) );
+
+			if ( empty( $new_ref_code ) ) {
+				return;
+			}
+
 			$ref_code_owner_id = WP_Refer_Code::get_user_id_by_ref_code( $new_ref_code );
-			if ( ! empty( $new_ref_code ) && $ref_code_owner_id !== false && $ref_code_owner_id != $user->ID ) {
+			// ref code is not already in use.
+			if ( false === $ref_code_owner_id ) {
+				return;
+			}
+
+			if ( (int) $ref_code_owner_id !== $user->ID ) {
 				$errors->add( 'unique-ref-code', __( 'Submitted refer code is already in use', 'wp-referral-code' ) );
 			}
 		}
 	}
 
+	/**
+	 * Handles ajax request to delete referral relation
+	 *
+	 * @return void
+	 */
 	public function ajax_delete_user_relation() {
 		$data              = wp_unslash( $_POST );
 		$to_delete_user_id = sanitize_text_field( $data['user_id'] );
@@ -162,8 +175,9 @@ final class Shalior_Grs_User_Edit {
 		ob_start();
 		include_once WP_REFERRAL_CODE_PATH . '/admin/partials/wp-referral-code-admin-invited-users.php';
 		include_once WP_REFERRAL_CODE_PATH . '/admin/partials/wp-referral-code-admin-update-ref-code.php';
+		// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo ob_get_clean();
-
+		// phpcs:enable
 	}
 
 	/**

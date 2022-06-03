@@ -1,7 +1,7 @@
 <?php
 
 /**
- * handles options of the plugin
+ * Handles options of the plugin
  *
  * @access public
  * @package    WP_Referral_Code
@@ -51,28 +51,24 @@ final class WP_Referral_Code_Settings {
 	public function load_settings() {
 		add_action( 'admin_init', array( $this, 'settings_init' ) );
 		add_action( 'admin_menu', array( $this, 'add_options_page' ) );
-
-		// get options
 	}
 
-	/**
-	 * @param $args
-	 */
+
 	public function field_code_length( $args ) {
 		$option = $this->options;
-		// include html
+		// include html.
 		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/field_code_length.php';
 	}
 
 	public function field_register_url( $args ) {
 		$option = $this->options;
-		// include html
+		// include html.
 		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/filed_register_url.php';
 	}
 
 	public function field_expiration_time( $args ) {
 		$option = $this->options;
-		// include html
+		// include html.
 		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/field_expiration_time.php';
 	}
 
@@ -83,14 +79,14 @@ final class WP_Referral_Code_Settings {
 	}
 
 	public function settings_init() {
-		// register a new setting
+		// register a new setting.
 		$args = array(
 			'description'       => '',
 			'sanitize_callback' => array( $this, 'sanitize_callback' ),
 			'show_in_rest'      => false,
 		);
 		register_setting( $this->page_slug, 'wp_referral_code_options', $args );
-		// register a new section
+		// register a new section.
 		add_settings_section(
 			'wp_referral_code_section_1',
 			__( 'Settings', 'wp-referral-code' ),
@@ -98,10 +94,10 @@ final class WP_Referral_Code_Settings {
 			$this->page_slug
 		);
 
-		// code length field
+		// code length field.
 		add_settings_field(
 			'wp_referral_code_code_length', // as of WP 4.6 this value is used only internally
-			// use $args' label_for to populate the id inside the callback
+			// use $args' label_for to populate the id inside the callback.
 			__( 'Refer code length: 5-8 is recommended', 'wp-referral-code' ),
 			array( $this, 'field_code_length' ),
 			$this->page_slug,
@@ -112,10 +108,10 @@ final class WP_Referral_Code_Settings {
 			)
 		);
 
-		// register url length
+		// register url length.
 		add_settings_field(
 			'wp_referral_code_register_url', // as of WP 4.6 this value is used only internally
-			// use $args' label_for to populate the id inside the callback
+			// use $args' label_for to populate the id inside the callback.
 			__( 'Register url', 'wp-referral-code' ),
 			array( $this, 'field_register_url' ),
 			$this->page_slug,
@@ -128,7 +124,7 @@ final class WP_Referral_Code_Settings {
 
 		add_settings_field(
 			'wp_referral_code_expiration_time', // as of WP 4.6 this value is used only internally
-			// use $args' label_for to populate the id inside the callback
+			// use $args' label_for to populate the id inside the callback.
 			__( 'Expiration time(hours)', 'wp-referral-code' ),
 			array( $this, 'field_expiration_time' ),
 			$this->page_slug,
@@ -144,16 +140,16 @@ final class WP_Referral_Code_Settings {
 
 		$have_err = false;
 
-		// check if the data has changed
+		// check if the data has changed.
 		if ( $this->options == $data ) {
 			return $data;
 		}
-		// validate code_length
+		// validate code_length.
 		if ( ! ( $data['code_length'] >= 3 && $data['code_length'] <= 10 && is_numeric( $data['code_length'] ) ) ) {
 			add_settings_error( $this->page_slug, $this->page_slug, __( 'Chose a number between 3 & 10', 'wp-referral-code' ) );
 			$have_err = true;
 		}
-		// validate register_url
+		// validate register_url.
 		if ( wrc_is_valid_url( $data['register_url'] ) === false ) {
 			add_settings_error( $this->page_slug, $this->page_slug, __( 'Register Url is not valid', 'wp-referral-code' ) );
 			$have_err = true;
@@ -165,12 +161,12 @@ final class WP_Referral_Code_Settings {
 		}
 
 		if ( ! $have_err ) {
-			// reset ref codes if no err found and code_length value has changed
+			// reset ref codes if no err found and code_length value has changed.
 			if ( $this->options['code_length'] != $data['code_length'] ) {
 				wrc_set_ref_code_all_users( true, $data['code_length'] );
 			}
 
-			// sanitize
+			// sanitize.
 			$data['code_length']     = sanitize_text_field( $data['code_length'] );
 			$data['register_url']    = esc_url_raw( $data['register_url'] );
 			$data['expiration_time'] = sanitize_text_field( $data['expiration_time'] );
@@ -181,7 +177,6 @@ final class WP_Referral_Code_Settings {
 		return $this->options;
 	}
 
-	// menu methods
 	public function add_options_page() {
 		add_options_page(
 			'WP Referral Code Options',
