@@ -6,10 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: shalior/action-phpcs-wordpress@v1.6.2
+      - uses: shalior/action-phpcs-wordpress@master
         with:
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          level: warning
-          phpcs_standard: MySource
           use_default_configuration_file: true
+          phpcs_args: '-n' # ignore warnings
