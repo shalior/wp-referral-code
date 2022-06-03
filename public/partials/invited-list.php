@@ -5,8 +5,8 @@
 			$user = get_user_by( 'id', $user_id );
 			if ( false !== $user ) :
 				?>
-				<li class="wrc-invited-user-item" id="wrc-invited-user-<?php esc_attr_e( $user_id ); ?>">
-					<?php esc_html_e( apply_filters( 'wp_referral_code_invited_user_text', $user->user_login, $user_id ) ); ?>
+				<li class="wrc-invited-user-item" id="wrc-invited-user-<?php echo esc_attr( $user_id ); ?>">
+					<?php echo esc_html( apply_filters( 'wp_referral_code_invited_user_text', $user->user_login, $user_id ) ); ?>
 				</li>
 			<?php endif; ?>
 
@@ -15,6 +15,6 @@
 <?php else : ?>
 	<?php $message = __( 'You have invited no one yet!', 'wp-referral-code' ); ?>
 	<p class="wrc-empty-invite-list-message">
-		<?php esc_html_e( apply_filters( 'wp_referral_code_empty_list_message', $message, get_current_user_id() ) ); ?>
+		<?php echo esc_html( apply_filters( 'wp_referral_code_empty_list_message', $message, get_current_user_id() ) ); ?>
 	</p>
 <?php endif; ?>
