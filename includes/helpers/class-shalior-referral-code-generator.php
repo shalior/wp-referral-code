@@ -35,13 +35,11 @@ class Shalior_Referral_Code_Generator {
 	 *
 	 * @return string
 	 */
-	public function get_ref_code(
-		$length = null
-	) {
+	public function get_ref_code( $length = null ) {
 
 		global $wp_referral_code_options;
 
-		$code_length = empty( $length ) ? $wp_referral_code_options['code_length'] : $length;
+		$code_length = empty( $length ) ? ( isset( $wp_referral_code_options['code_length'] ) ? $wp_referral_code_options['code_length'] : 6 ) : $length;
 		$ref_code    = $this->generate_ref_code( $code_length );
 		if ( $this->is_unique( $ref_code ) ) {
 			return $ref_code;
