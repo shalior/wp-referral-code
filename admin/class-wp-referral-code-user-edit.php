@@ -50,7 +50,7 @@ final class Shalior_Grs_User_Edit {
 
 		wp_enqueue_script( 'wp-referral-code-main', WP_REFERRAL_CODE_URI . 'admin/js/main.min.js', array(), WP_REFERRAL_CODE_VERSION, false );
 		wp_enqueue_script( 'select2', WP_REFERRAL_CODE_URI . 'admin/js/select2.full.min.js', array( 'jquery' ), WP_REFERRAL_CODE_VERSION, true );
-		wp_enqueue_style( 'select2', WP_REFERRAL_CODE_URI . 'admin/css/select2.min.css', array(), WP_REFERRAL_CODE_VERSION, true );
+		wp_enqueue_style( 'select2', WP_REFERRAL_CODE_URI . 'admin/css/select2.min.css', array(), WP_REFERRAL_CODE_VERSION, 'all' );
 		wp_localize_script(
 			'wp-referral-code-main',
 			'WPReferralCode',
