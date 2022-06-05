@@ -27,6 +27,9 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.4.2 =
+* Minor bug fix, correctly loading styles.
+
 = 1.4.1 =
 * Add support for PHP 8.*
 
