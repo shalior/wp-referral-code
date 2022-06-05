@@ -26,7 +26,7 @@ $invited_users_ids = $ref_code->get_invited_users_id();
 				?>
 
 				<?php if ( ! empty( $referrer_id ) ) : ?>
-					<a href="<?php esc_url( admin_url( '/user-edit.php?user_id=' . $referrer_id . '#wp-referral-code-user-edit' ) ); ?>" target="_blank">
+					<a href="<?php esc_url( admin_url( '/user-edit.php?user_id=' . $referrer_id . '#wp-referral-code-user-edit' ) ); ?>"  target="_blank">
 						<?php esc_html_e( 'this user has been invited by ', 'wp-referral-code' ); ?>
 						<strong class="text-lg">
 							<?php
@@ -36,7 +36,8 @@ $invited_users_ids = $ref_code->get_invited_users_id();
 							);
 							?>
 						</strong></a>
-					<br><hr>
+					<br>
+					<hr>
 				<?php else : ?>
 					<?php esc_html_e( 'No one invited this user', 'wp-referral-code' ); ?> <br>
 					<hr>
@@ -44,8 +45,22 @@ $invited_users_ids = $ref_code->get_invited_users_id();
 
 				<?php esc_html_e( 'This user\'s invite link: ', 'wp-referral-code' ); ?>
 				<a href="<?php esc_url( $ref_code->get_ref_link() ); ?>" target="_blank"><?php echo esc_url( $ref_code->get_ref_link() ); ?></a>
-				<br><hr>
+				<br>
+				<hr>
 
+				<div style="margin: 1rem 0;">
+					<p><strong>Manually add a user to referred list</strong></p>
+					<br>
+
+					<?php require_once WP_REFERRAL_CODE_PATH . 'admin/partials/user-select-search.php'; ?>
+					<button style="background-color: #2ddd30; border-color: #389d05"
+							data-referrer-id="<?php echo esc_attr( $user_id ); ?>"
+							class="wrc-add-relation button button-small button-primary add">
+						<?php esc_html_e( 'Add', 'wp-referral-code' ); ?>
+					</button>
+				</div>
+
+				<hr>
 				<?php if ( empty( $invited_users_ids ) ) : ?>
 					<?php esc_html_e( 'this user has invited 0 users', 'wp-referral-code' ); ?>
 				<?php else : ?>
@@ -69,7 +84,7 @@ $invited_users_ids = $ref_code->get_invited_users_id();
 						</li>
 						<?php
 					endforeach;
-				endif;
+					endif;
 				?>
 				</ul>
 			</ul>

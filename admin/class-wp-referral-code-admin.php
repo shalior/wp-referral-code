@@ -61,6 +61,7 @@ class WP_Referral_Code_Admin {
 		require_once WP_REFERRAL_CODE_PATH . '/admin/class-wp-referral-code-user-edit.php';
 		require_once WP_REFERRAL_CODE_PATH . '/admin/class-wp-referral-code-options.php';
 		require_once WP_REFERRAL_CODE_PATH . '/admin/class-wp-referral-code-users-columns.php';
+		require_once WP_REFERRAL_CODE_PATH . '/admin/class-wp-referral-code-search-user.php';
 	}
 
 }
