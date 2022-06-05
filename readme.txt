@@ -27,6 +27,9 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.4.1 =
+* Add support for PHP 8.*
+
 = 1.4.0 =
 * You can now manually add referral relation for users.
 * Check user edit page (Wordpress admin -> users -> select a user -> scroll down) to see the new Add button.
