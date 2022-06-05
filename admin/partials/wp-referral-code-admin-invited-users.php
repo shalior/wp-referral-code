@@ -80,7 +80,7 @@ $invited_users_ids = $ref_code->get_invited_users_id();
 									class="wrc-remove-relation button button-small button-primary delete-permanently"
 									data-referrer-id="<?php echo esc_attr( $user_id ); ?>"
 									data-user-id="<?php echo esc_attr( $invited_user_id ); ?>">
-								<?php esc_html_e( 'Delete' , 'wp-referral-code' ); ?>
+								<?php esc_html_e( 'Delete', 'wp-referral-code' ); ?>
 							</button>
 						</li>
 						<?php
