@@ -1,6 +1,7 @@
 const path              = require( 'path' );
 const CompressionPlugin = require( "compression-webpack-plugin" );
 module.exports          = {
+	mode: 'production',
 	entry: './admin/js/main.js',
 	output: {
 		filename: 'main.min.js',
