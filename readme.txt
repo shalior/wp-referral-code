@@ -27,6 +27,13 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.4.0 =
+* You can now manually add referral relation for users.
+* Check user edit page (Wordpress admin -> users -> select a user -> scroll down) to see the new Add button.
+
+= 1.3.2 =
+* General fixes and refactors
+
 = 1.3.1 =
 * Fix a bug related to updating/setting custom refer codes
 
