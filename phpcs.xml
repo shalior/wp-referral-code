@@ -73,9 +73,9 @@
     For more information, also see:
     https://github.com/PHPCompatibility/PHPCompatibility
     -->
-        <config name="minimum_supported_wp_version" value="4.8" />
-        <config name="testVersion" value="5.6-"/>
-        <rule ref="PHPCompatibilityWP"/>
+<!--        <config name="minimum_supported_wp_version" value="4.8" />-->
+<!--        <config name="testVersion" value="5.6-"/>-->
+<!--        <rule ref="PHPCompatibilityWP"/>-->
 
     <!--
     For information on additional custom properties available, check out
