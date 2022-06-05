@@ -43,16 +43,18 @@ final class Shalior_Search_User {
 		check_ajax_referer( 'wp_referral_code_search_user_select2', 'nonce' );
 
 		$data     = wp_unslash( $_REQUEST );
-		$page     = (int) sanitize_text_field( $data['page'] );
+		$page     = isset( $data['page'] ) ? sanitize_text_field( $data['page'] ) : 1;
 		$per_page = 10;
-		$user_id  = sanitize_text_field( $data['user_id'] );
+		$user_id  = isset( $data['user_id'] ) ? sanitize_text_field( $data['user_id'] ) : 0;
 
 		$excludes = ( new WP_Refer_Code( $user_id ) )->get_invited_users_id();
+
+		$search = isset( $data['term'] ) ? '*' . sanitize_text_field( $data['term'] ) . '*' : '';
 
 		$users_query = new WP_User_Query(
 			array(
 				'exclude'        => $excludes,
-				'search'         => '*' . sanitize_text_field( $data['term'] ) . '*',
+				'search'         => $search,
 				'search_columns' => array( 'user_login', 'user_url', 'user_email', 'user_nicename', 'display_name' ),
 				'orderby'        => 'user_registered',
 				'order'          => 'DESC',
