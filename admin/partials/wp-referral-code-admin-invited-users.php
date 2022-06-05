@@ -21,12 +21,8 @@ $invited_users_ids = $ref_code->get_invited_users_id();
 			<!-- Lists  -->
 			<br>
 			<ul class="invited-users_list list">
-				<?php
-				$referrer_id = $ref_code->get_referrer_id();
-				?>
-
 				<?php if ( ! empty( $referrer_id ) ) : ?>
-					<a href="<?php esc_url( admin_url( '/user-edit.php?user_id=' . $referrer_id . '#wp-referral-code-user-edit' ) ); ?>"  target="_blank">
+					<a href="<?php echo esc_url( admin_url( '/user-edit.php?user_id=' . $referrer_id . '#wp-referral-code-user-edit' ) ); ?>"  target="_blank">
 						<?php esc_html_e( 'this user has been invited by ', 'wp-referral-code' ); ?>
 						<strong class="text-lg">
 							<?php
