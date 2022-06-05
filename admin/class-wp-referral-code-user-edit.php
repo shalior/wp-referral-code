@@ -60,6 +60,7 @@ final class Shalior_Grs_User_Edit {
 					'text'        => __( 'You won\'t be able to revert this!', 'wp-referral-code' ),
 					'confirmText' => __( 'Yes, delete it!', 'wp-referral-code' ),
 					'cancelText'  => __( 'Cancel', 'wp-referral-code' ),
+					'error'       => __( 'Something went wrong!', 'wp-referral-code' ),
 				),
 				'confirmedAlert' => array(
 					'title' => __( 'Deleted!', 'wp-referral-code' ),
@@ -146,6 +147,28 @@ final class Shalior_Grs_User_Edit {
 
 	public function ajax_add_user_relation() {
 		list($to_add_user_id, $referrer_id) = $this->ajax_relation_request_validation( 'wp_referral_code_add_user_relation_nonce' );
+
+		if ( $to_add_user_id === $referrer_id ) {
+			wp_send_json_error(
+				array(
+					'error' => __( 'You can not add yourself as a referrer', 'wp-referral-code' ),
+				),
+				200
+			);
+			wp_die();
+		}
+
+		$already_has_referrer = ! empty( get_user_meta( $to_add_user_id, 'wrc_referrer_id', true ) );
+
+		if ( $already_has_referrer ) {
+			wp_send_json_error(
+				array(
+					'error' => __( 'User already has a referrer, You might want to first delete the relation', 'wp-referral-code' ),
+				),
+				200
+			);
+			wp_die();
+		}
 
 		// set referrer as inviter of new user.
 		update_user_meta( $to_add_user_id, 'wrc_referrer_id', $referrer_id );

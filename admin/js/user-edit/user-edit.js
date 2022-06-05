@@ -1,6 +1,7 @@
 import AjaxButton from "../AjaxButton";
 import DeleteHandler from "./DeleteHandler";
 import AddHandler from "./AddHandler";
+import Swal from "sweetalert2";
 
 const $ = jQuery;
 
@@ -45,12 +46,17 @@ $(document).ready(() => {
 
         const addRelationAjaxButton = new AjaxButton($(this), new AddHandler(toAddUserId, referrerID));
 
-        addRelationAjaxButton.disable().loading();
+        addRelationAjaxButton.disable();
 
         addRelationAjaxButton.handle(response => {
             window.location.reload();
         }, response => {
-            addRelationAjaxButton.changeTextTo('Error')
+            addRelationAjaxButton.enable();
+            Swal.fire(
+                WPReferralCode.alert.error,
+                response.data.error,
+                'error'
+            );
         });
 
 

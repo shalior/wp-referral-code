@@ -1,5 +1,3 @@
-import Swal from "sweetalert2";
-
 const $ = jQuery;
 
 export default class AddHandler {
@@ -9,14 +7,13 @@ export default class AddHandler {
     }
 
     sendRequest(successCallback, failCallback) {
-
         $.post(ajaxurl, this.getData(), (response) => {
             if (response.success) {
                 successCallback(response);
             } else {
                 failCallback(response);
             }
-        }).fail(this.onRequestFailure);
+        }).fail(failCallback);
 
     }
 
@@ -28,10 +25,5 @@ export default class AddHandler {
             nonce: WPReferralCode.nonceAdd,
         }
     };
-
-
-    onRequestFailure(err) {
-        // todo:
-    }
 
 }
