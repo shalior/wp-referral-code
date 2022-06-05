@@ -9,7 +9,6 @@ function clearTooltip(e) {
 	// JQuery( ".tooltiptext" ).html( msg )
 	setTimeout(
 		function () {
-			console.log( 'timer' );
 			jQuery( ".tooltiptext" ).removeClass( 'tooltip-visible' );
 			jQuery( ".tooltiptext" ).html( '' );
 		},

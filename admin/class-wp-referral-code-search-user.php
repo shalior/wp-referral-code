@@ -45,9 +45,13 @@ final class Shalior_Search_User {
 		$data     = wp_unslash( $_REQUEST );
 		$page     = (int) sanitize_text_field( $data['page'] );
 		$per_page = 10;
+		$user_id  = sanitize_text_field( $data['user_id'] );
+
+		$excludes = ( new WP_Refer_Code( $user_id ) )->get_invited_users_id();
 
 		$users_query = new WP_User_Query(
 			array(
+				'exclude'        => $excludes,
 				'search'         => '*' . sanitize_text_field( $data['term'] ) . '*',
 				'search_columns' => array( 'user_login', 'user_url', 'user_email', 'user_nicename', 'display_name' ),
 				'orderby'        => 'user_registered',

@@ -2,7 +2,6 @@
 		class="wrc-search-user"
 		style="width: 100%">
 	<option value="-1"><?php esc_html_e( 'Search for a user', 'wp-referral-code' ); ?></option>
-	<option value="-22"><?php esc_html_e( 'ddd', 'wp-referral-code' ); ?></option>
 </select>
 
 <script>
@@ -17,6 +16,7 @@
 				data: function (params) {
 					return {
 						term: params.term,
+						user_id: <?php echo esc_html( $user_id ); ?>,
 						page: params.page || 1,
 						action: 'wp_referral_code_search_user_select2',
 						nonce: '<?php echo esc_html( wp_create_nonce( 'wp_referral_code_search_user_select2' ) ); ?>',

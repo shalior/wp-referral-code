@@ -31,6 +31,7 @@ final class Shalior_Grs_User_Edit {
 		// Only run our customization on the 'user-edit.php' page in the admin.
 		add_action( 'load-user-edit.php', array( $this, 'load_user_edit' ) );
 		add_action( 'wp_ajax_wp_referral_code_delete_user_relation', array( $this, 'ajax_delete_user_relation' ) );
+		add_action( 'wp_ajax_wp_referral_code_add_user_relation', array( $this, 'ajax_add_user_relation' ) );
 	}
 
 	/**
@@ -65,6 +66,7 @@ final class Shalior_Grs_User_Edit {
 					'text'  => __( 'The relation has been deleted.', 'wp-referral-code' ),
 				),
 				'nonce'          => wp_create_nonce( 'wp_referral_code_delete_user_relation_nonce' ),
+				'nonceAdd'       => wp_create_nonce( 'wp_referral_code_add_user_relation_nonce' ),
 			)
 		);
 
@@ -129,22 +131,7 @@ final class Shalior_Grs_User_Edit {
 	 * @return void
 	 */
 	public function ajax_delete_user_relation() {
-		$data              = wp_unslash( $_POST );
-		$to_delete_user_id = sanitize_text_field( $data['user_id'] );
-		$referrer_id       = sanitize_text_field( $data['referrer_id'] );
-
-		if ( ! is_numeric( $to_delete_user_id ) || ! ( new WP_User( $to_delete_user_id ) ) || ! ( new WP_User( $referrer_id ) ) ) {
-			wp_send_json_error(
-				array(
-					'Invalid data',
-					$referrer_id,
-					$to_delete_user_id,
-				),
-				422
-			);
-		}
-
-		check_ajax_referer( 'wp_referral_code_delete_user_relation_nonce', 'nonce', true );
+		list($to_delete_user_id,$referrer_id) = $this->ajax_relation_request_validation( 'wp_referral_code_delete_user_relation_nonce' );
 
 		wp_referral_code_delete_relation( $to_delete_user_id, $referrer_id );
 		wp_send_json_success(
@@ -152,6 +139,26 @@ final class Shalior_Grs_User_Edit {
 				'done',
 				$referrer_id,
 				$to_delete_user_id,
+			)
+		);
+
+	}
+
+	public function ajax_add_user_relation() {
+		list($to_add_user_id, $referrer_id) = $this->ajax_relation_request_validation( 'wp_referral_code_add_user_relation_nonce' );
+
+		// set referrer as inviter of new user.
+		update_user_meta( $to_add_user_id, 'wrc_referrer_id', $referrer_id );
+
+		// adding new user to referrer invited list.
+		wp_referral_code_add_user_to_referrer_invite_list( $to_add_user_id, $referrer_id );
+		do_action( 'wp_referral_code_manual_user_added', $to_add_user_id, $referrer_id );
+
+		wp_send_json_success(
+			array(
+				'done',
+				$referrer_id,
+				$to_add_user_id,
 			)
 		);
 
@@ -196,6 +203,28 @@ final class Shalior_Grs_User_Edit {
 		}
 
 		return self::$instance;
+	}
+
+
+	private function ajax_relation_request_validation( $nonce_action ) {
+		check_ajax_referer( $nonce_action, 'nonce', true );
+
+		$data        = wp_unslash( $_POST );
+		$user_id     = sanitize_text_field( $data['user_id'] );
+		$referrer_id = sanitize_text_field( $data['referrer_id'] );
+
+		if ( ! is_numeric( $user_id ) || ! ( new WP_User( $user_id ) ) || ! ( new WP_User( $referrer_id ) ) ) {
+			wp_send_json_error(
+				array(
+					'Invalid data',
+					$referrer_id,
+					$user_id,
+				),
+				422
+			);
+		}
+
+		return array( $user_id, $referrer_id );
 	}
 
 }
