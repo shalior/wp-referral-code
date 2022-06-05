@@ -26,7 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 // holds the plugin path.
 define( 'WP_REFERRAL_CODE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_REFERRAL_CODE_URI', plugin_dir_url( __FILE__ ) );
-define( 'WP_REFERRAL_CODE_VERSION', '1.3.1' );
+define( 'WP_REFERRAL_CODE_VERSION', '1.4.1' );
 
 /**
  * The code that runs during plugin activation.

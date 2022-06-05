@@ -47,7 +47,7 @@ function wrc_get_ref_code_query() {
  *
  * @return void
  */
-function wrc_set_ref_code_all_users( $refresh = false, $length ) {
+function wrc_set_ref_code_all_users( $refresh, $length ) {
 
 	$users = get_users();
 
