@@ -27,6 +27,9 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.4.3 =
+* Fixed: Prevent submitting himself and already referred user.
+
 = 1.4.2 =
 * Minor bug fix, correctly loading styles.
 
