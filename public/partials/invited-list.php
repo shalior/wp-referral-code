@@ -13,8 +13,7 @@
 		<?php endforeach; ?>
 	</ul>
 <?php else : ?>
-	<?php $message = __( 'You have invited no one yet!', 'wp-referral-code' ); ?>
 	<p class="wrc-empty-invite-list-message">
-		<?php echo esc_html( apply_filters( 'wp_referral_code_empty_list_message', $message, get_current_user_id() ) ); ?>
+		<?php echo esc_html( apply_filters( 'wp_referral_code_empty_list_message', __( 'You have invited no one yet!', 'wp-referral-code' ), get_current_user_id() ) ); ?>
 	</p>
 <?php endif; ?>

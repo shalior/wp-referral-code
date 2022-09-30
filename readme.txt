@@ -27,6 +27,10 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.4.5 =
+* Fix: Make more statements translatable.
+* Document: Add new shortcode to shortcodes list.
+
 = 1.4.4 =
 * Feature: New shortcode [wp-referral-code var="most_referring_users"] shows users with most referring
 

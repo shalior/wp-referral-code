@@ -69,6 +69,15 @@
 				<?php esc_html_e( 'Shows a list of users current user invited (lists usernames by default: use hooks to change it)', 'wp-referral-code' ); ?>
 			</td>
 		</tr>
+
+		<tr>
+			<td class="wrc-shortcode">
+				[wp-referral-code var="most_referring_users"]
+			</td>
+			<td>
+				<?php esc_html_e( 'Shows a list of top referring users (10 users by default, configurable with hooks)', 'wp-referral-code' ); ?>
+			</td>
+		</tr>
 		</tbody>
 	</table>
 </div>
