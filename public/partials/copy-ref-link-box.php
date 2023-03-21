@@ -19,10 +19,6 @@
 
 	</span>
 	<div class="tooltip"><span class="tooltiptext"><?php esc_html_e( 'Tooltip text', 'wp-referral-code' ); ?></span>
-		<input id="ref_link" readonly type="text" value="
-		<?php
-		echo esc_url( $ref_code->get_ref_link() )
-		?>
-		"></div>
+		<input id="ref_link" readonly type="text" value="<?php echo esc_url( $ref_code->get_ref_link() )?>"></div>
 
 </div>
