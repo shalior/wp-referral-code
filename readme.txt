@@ -10,13 +10,13 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 this plugin brings referral codes to your wordpress website. many shortcodes are available and its all free
 
 == Description ==
-WP Referral code helps you generate a refer code for each of your users and start your version of referral marketing.on user registeration plugin will capture the refer code. WP Referral Code provides a user-friendly "copy refer link box" so that users can easily copy and share their link.
+WP Referral Code is a WordPress plugin that helps you generate a unique referral code for each of your users, enabling you to start your own version of referral marketing. Upon user registration, the plugin captures the refer code automatically. Additionally, WP Referral Code provides a user-friendly "copy refer link box" that allows users to easily copy and share their referral link.
 
-this plugin\'s only dependency is wordpress core you can use it with all plugins out there. the logic after successful referred registeration is up to you though. 2 important hooks will help you with that. check documentation on plugin website for more information.[Documentation](http://shalior.ir/wp-referral-code "Shalior")
+This plugin is dependent only on the WordPress core and can be used with all other plugins. However, the logic after successful referral registration is up to you. To help with this, two important hooks are provided. For more information on how to use them, please refer to the plugin documentation, which can be found on the plugin website [Documentation](http://shalior.ir/wp-referral-code "Shalior").
 
-several shortcodes are provided to help you get the things where they should be. you can see a list of them on plugin options
+Several shortcodes are available to help you place things where they need to be. A list of these shortcodes can be found in the plugin options.
 
-All information about referral status of user is on user edit page(Dashboard->Users->selec a user). there you can see how many users he has invited and referred by who.
+All information related to the referral status of a user can be found on the user edit page (Dashboard->Users->select a user). Here, you can view how many users the user has invited and who they were referred by.
 
 == Installation ==
 note: on activation plugin will create refer codes for all of your users.
@@ -82,7 +82,7 @@ note: on activation plugin will create refer codes for all of your users.
 = 1.0.1 =
 * This minor update includes code improvements and some new hooks to make the plugin easier to extend by developers. no breaking changes.
 * add new filter 'wp_referral_code_validate_submission' to control wheter refer data should be submited to database.
-* new helper function 'wp_referral_code_add_user_to_referrer_invite_list($user_id, $referrer_id)' 
+* new helper function 'wp_referral_code_add_user_to_referrer_invite_list($user_id, $referrer_id)'
 
 = 1.0.0 =
 * First version
