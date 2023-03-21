@@ -22,7 +22,7 @@
 	</style>
 	<table>
 		<thead>
-		<h1><?php esc_html_e( 'ShortCodes available', 'wp-referral-code' ); ?></h1>
+		<h1><?php esc_html_e( 'Available shortcodes', 'wp-referral-code' ); ?></h1>
 		</thead>
 		<tbody>
 		<tr>
