@@ -2,7 +2,7 @@
 Contributors: shalior
 Tags: refer code, referral marketing, refer
 Requires at least: 4.8
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 5.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
