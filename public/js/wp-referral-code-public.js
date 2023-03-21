@@ -1,5 +1,5 @@
 // deleting tooltip
-var btns = document.querySelectorAll( '#copy-btn' );
+var btns = document.querySelectorAll( '.btn-copy' );
 for (var i = 0; i < btns.length; i++) {
 	btns[i].addEventListener( 'mouseleave', clearTooltip );
 	btns[i].addEventListener( 'blur', clearTooltip );
@@ -37,7 +37,7 @@ function fallbackMessage(action) {
 }
 
 
-var clipboard = new ClipboardJS( '#copy-btn' );
+var clipboard = new ClipboardJS( '.btn-copy' );
 clipboard.on(
 	'success',
 	function (e) {
