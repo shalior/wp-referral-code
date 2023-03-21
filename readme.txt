@@ -27,6 +27,9 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.4.6 =
+* Minor fix to remove spaces around refer link in copy ref link box
+
 = 1.4.5 =
 * Fix: Make more statements translatable.
 * Document: Add new shortcode to shortcodes list.
