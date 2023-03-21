@@ -3,6 +3,7 @@
     position: relative;
     display: inline-block;
     width: 100%;
+    height: 50px;
 
     .tooltiptext {
       visibility: hidden;
@@ -69,6 +70,7 @@
       fill: currentColor;
       width: 1.3rem;
       height: 1.3rem;
+      max-width: max-content;
     }
 
     &:hover svg {

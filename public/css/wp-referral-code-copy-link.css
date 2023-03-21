@@ -2,6 +2,7 @@
   position: relative;
   display: inline-block;
   width: 100%;
+  height: 50px;
 }
 .wprc-copy-link .tooltip .tooltiptext {
   visibility: hidden;
@@ -63,6 +64,7 @@
   fill: currentColor;
   width: 1.3rem;
   height: 1.3rem;
+  max-width: max-content;
 }
 .wprc-copy-link .btn-copy:hover svg {
   fill: #fff;
