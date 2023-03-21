@@ -27,6 +27,9 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.4.9 =
+* Update styles to support more themes.
+
 = 1.4.7 =
 * Redesign copy link box, fix minor bugs.
 
