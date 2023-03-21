@@ -27,6 +27,9 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.4.7 =
+* Redesign copy link box, fix minor bugs.
+
 = 1.4.6 =
 * Minor fix to remove spaces around refer link in copy ref link box
 
