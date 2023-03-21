@@ -38,9 +38,7 @@
 }
 
 #copy-btn {
-	font-family: "Font Awesome 5 Free" !important;
 	height: 50px;
-
 	position: relative;
 	display: inline-block;
 	font-size: 1.5em;
@@ -59,10 +57,26 @@
 	-ms-user-select: none;
 	user-select: none;
 	-webkit-appearance: none;
+	transition: all 300ms;
+	margin: 0;
+	padding: 0 1rem;
 }
 
 #copy-btn:hover {
-	color: #3f3f3f;
+	background-color: rgba(63, 63, 63, 0.61);
+	background-image: linear-gradient(rgba(79, 79, 79, 0.4), rgba(63, 63, 63, 0.5));
+	color: #fff;
+}
+
+#copy-btn svg {
+	vertical-align: middle;
+	fill: currentColor;
+	width: 1.3rem;;
+	height: 1.3rem;
+}
+
+#copy-btn:hover svg {
+	fill: #fff;
 }
 
 input#ref_link {
@@ -74,25 +88,12 @@ input#ref_link {
 	border-radius: 3px 0 0 3px;
 	position: relative;
 	text-align: left;
-	padding-left: 8px;
+	padding-left: 1.5rem;
 	transition: opacity .5s;
 	outline: none;
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, .075);
 	font-size: 1em;
 }
-
-/* new styles *?
-
-<div class="tooltip">
-	<button id="copy-btn" class="btn fas fa-copy" data-clipboard-target="#ref_link">
-<input id="ref_link" readonly value="<?php
-echo esc_url($ref_code->get_ref_link()) ?>">
-<span class="tooltiptext">Tooltip text</span>
-										</button>
-										  </div>
-
-
- */
 
 .input-group input, .input-group-button {
 	display: table-cell;
@@ -132,33 +133,4 @@ button, input, optgroup, select, textarea {
 
 .input-group-button:last-child .btn {
 	margin-left: -1px;
-}
-
-.coping-btn {
-	position: relative;
-	display: inline-block;
-	padding: 6px 12px;
-	font-size: 13px;
-	font-weight: 700;
-	line-height: 20px;
-	color: #333;
-	white-space: nowrap;
-	vertical-align: middle;
-	cursor: pointer;
-	background-color: #eee;
-	background-image: linear-gradient(#fcfcfc, #eee);
-	border: 1px solid #d5d5d5;
-	border-radius: 3px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	-webkit-appearance: none;
-}
-
-.coping-btn img {
-	width: 36px;
-	height: 36px;
-	display: inline;
-	max-width: none;
 }

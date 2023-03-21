@@ -37,8 +37,8 @@ function wp_referral_code_handle_new_registration( $user_id ) {
 		return;
 	}
 
-	/*
-	 * fires before refer code related information are submitted on database
+	/**
+	 * Fires before refer code related information are submitted on database
 	 * this action won't run if ref code doesn't exist
 	 * passed parameters:
 	 * $new_user_id: id of newly registered user
