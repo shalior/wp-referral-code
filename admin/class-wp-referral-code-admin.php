@@ -62,6 +62,22 @@ class WP_Referral_Code_Admin {
 		require_once WP_REFERRAL_CODE_PATH . '/admin/class-wp-referral-code-options.php';
 		require_once WP_REFERRAL_CODE_PATH . '/admin/class-wp-referral-code-users-columns.php';
 		require_once WP_REFERRAL_CODE_PATH . '/admin/class-wp-referral-code-search-user.php';
+
+		if ( is_admin() ) {
+			add_filter(
+				'plugin_action_links',
+				function ( $links, $file ) {
+					if ( plugin_basename( 'wp-referral-code/wp-referral-code.php' ) === $file ) {
+						$links[] = '<a href="' . admin_url( 'options-general.php?page=wp-referral-code' ) . '">' . __( 'Settings', 'wp-referral-code' ) . '</a>';
+						$links[] = '<a href="https://shalior.ir/wp-referral-code">' . __( 'Documentation & Support', 'wp-referral-code' ) . '</a>';
+					}
+
+					return $links;
+				},
+				10,
+				2
+			);
+		}
 	}
 
 }
