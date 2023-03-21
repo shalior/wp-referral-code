@@ -27,20 +27,19 @@ function wp_referral_code_user_param_shortcodes_init() {
 			case 'invited_count':// [wp-referral-code var="invited_count"]
 				return empty( $ref_code->get_invited_users_id() ) ? '0' : count( $ref_code->get_invited_users_id() );
 			case 'most_referring_users': // [wp-referral-code var="most_referring_users"]
-				$limit = sanitize_text_field( apply_filters( 'wp_referral_code_invited_limit_most_referring', 10 ) );
-				$limit = is_numeric( $limit ) ? $limit : 10;
-				$sql   = "
-					select count({$wpdb->usermeta}.meta_value) as counted, meta_value as id from wp_usermeta where meta_key = 'wrc_referrer_id'
-					and meta_value is not null                                                                             
-					group by meta_value
-					order by counted desc limit %d
-				";
+				$limit = apply_filters( 'wp_referral_code_invited_limit_most_referring', 10 );
 
-				$prepared = $wpdb->prepare( $sql, $limit );
-				$results  = $wpdb->get_results( $prepared, 'ARRAY_A' );
+				$results = $wpdb->get_results(
+					$wpdb->prepare(
+						"SELECT COUNT(meta_value) as counted, meta_value as id FROM {$wpdb->usermeta} WHERE meta_key = %s AND meta_value IS NOT NULL GROUP BY meta_value ORDER BY counted DESC LIMIT %d",
+						'wrc_referrer_id',
+						intval( $limit )
+					),
+					ARRAY_A
+				);
 
 				ob_start();
-					require WP_REFERRAL_CODE_PATH . 'public/partials/most-referring-list.php';
+				require WP_REFERRAL_CODE_PATH . 'public/partials/most-referring-list.php';
 
 				return ob_get_clean();
 
