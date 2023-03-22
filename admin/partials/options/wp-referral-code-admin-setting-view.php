@@ -140,7 +140,7 @@
 		padding: 1rem;
 		font-weight: bold;
 		cursor: pointer;
-        font-family: monospace, serif, Arial, "Times New Roman", "Bitstream Charter", Times, serif;
+		font-family: monospace, serif, Arial, "Times New Roman", "Bitstream Charter", Times, serif;
 	}
 
 	.wrc-toast {
