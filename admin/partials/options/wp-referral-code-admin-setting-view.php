@@ -140,6 +140,7 @@
 		padding: 1rem;
 		font-weight: bold;
 		cursor: pointer;
+        font-family: monospace, serif, Arial, "Times New Roman", "Bitstream Charter", Times, serif;
 	}
 
 	.wrc-toast {
@@ -176,7 +177,7 @@
 
 	.wrc-shortcodes-table th,
 	.wrc-shortcodes-table td {
-		border: 1px solid #ddd;
+		border: 1px solid rgba(169, 169, 169, 0.91);
 		padding: 8px;
 		text-align: left;
 	}
