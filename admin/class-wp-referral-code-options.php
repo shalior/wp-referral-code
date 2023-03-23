@@ -72,12 +72,6 @@ final class WP_Referral_Code_Settings {
 		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/field-expiration-time.php';
 	}
 
-	public function section_1( $args ) {
-		?>
-		<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Wp Referral code.', 'wp-referral-code' ); ?></p>
-		<?php
-	}
-
 	public function settings_init() {
 		// register a new setting.
 		$args = array(
@@ -90,22 +84,10 @@ final class WP_Referral_Code_Settings {
 		add_settings_section(
 			'wp_referral_code_section_1',
 			__( 'Settings', 'wp-referral-code' ),
-			array( $this, 'section_1' ),
+			function () {
+				// nothing!
+			},
 			$this->page_slug
-		);
-
-		// code length field.
-		add_settings_field(
-			'wp_referral_code_code_length', // as of WP 4.6 this value is used only internally
-			// use $args' label_for to populate the id inside the callback.
-			__( 'Refer code length: 5-8 is recommended', 'wp-referral-code' ),
-			array( $this, 'field_code_length' ),
-			$this->page_slug,
-			'wp_referral_code_section_1',
-			array(
-				'label_for' => 'code_length',
-				'class'     => 'wrc_row',
-			)
 		);
 
 		// register url length.
@@ -122,6 +104,20 @@ final class WP_Referral_Code_Settings {
 			)
 		);
 
+		// code length field.
+		add_settings_field(
+			'wp_referral_code_code_length', // as of WP 4.6 this value is used only internally
+			// use $args' label_for to populate the id inside the callback.
+			__( 'Refer code length', 'wp-referral-code' ),
+			array( $this, 'field_code_length' ),
+			$this->page_slug,
+			'wp_referral_code_section_1',
+			array(
+				'label_for' => 'code_length',
+				'class'     => 'wrc_row',
+			)
+		);
+
 		add_settings_field(
 			'wp_referral_code_expiration_time', // as of WP 4.6 this value is used only internally
 			// use $args' label_for to populate the id inside the callback.
@@ -134,6 +130,7 @@ final class WP_Referral_Code_Settings {
 				'class'     => 'wrc_row',
 			)
 		);
+
 	}
 
 	public function sanitize_callback( $data ) {
