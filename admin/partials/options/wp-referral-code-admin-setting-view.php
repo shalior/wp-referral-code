@@ -86,6 +86,16 @@
 	</table>
 </div>
 
+<!-- Asking for review -->
+<div class="wrap" style="border: 1px solid #ddd; background-color: #f9f9f9; padding: 20px;">
+	<h3 style="margin-top: 0;">Enjoying the plugin?</h3>
+	<p>Help me out by leaving a review on WordPress.org.</p>
+	<a href="https://wordpress.org/support/plugin/wp-referral-code/reviews/#new-post" target="_blank">
+		Leave a review
+	</a>
+</div>
+
+
 <div class="wrc-toast">
 	<div class="wrc-toast-content">
 		<?php esc_html_e( 'Copied to clipboard!', 'wp-referral-code' ); ?>
