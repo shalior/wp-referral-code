@@ -104,19 +104,6 @@ final class WP_Referral_Code_Settings {
 			)
 		);
 
-		add_settings_field(
-			'wp_referral_code_expiration_time', // as of WP 4.6 this value is used only internally
-			// use $args' label_for to populate the id inside the callback.
-			__( 'Expiration time(hours)', 'wp-referral-code' ),
-			array( $this, 'field_expiration_time' ),
-			$this->page_slug,
-			'wp_referral_code_section_1',
-			array(
-				'label_for' => 'expiration_time',
-				'class'     => 'wrc_row',
-			)
-		);
-
 		// code length field.
 		add_settings_field(
 			'wp_referral_code_code_length', // as of WP 4.6 this value is used only internally
@@ -127,6 +114,19 @@ final class WP_Referral_Code_Settings {
 			'wp_referral_code_section_1',
 			array(
 				'label_for' => 'code_length',
+				'class'     => 'wrc_row',
+			)
+		);
+
+		add_settings_field(
+			'wp_referral_code_expiration_time', // as of WP 4.6 this value is used only internally
+			// use $args' label_for to populate the id inside the callback.
+			__( 'Expiration time(hours)', 'wp-referral-code' ),
+			array( $this, 'field_expiration_time' ),
+			$this->page_slug,
+			'wp_referral_code_section_1',
+			array(
+				'label_for' => 'expiration_time',
 				'class'     => 'wrc_row',
 			)
 		);
