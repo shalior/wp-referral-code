@@ -22,8 +22,10 @@ All information related to the referral status of a user can be found on the use
 note: on activation plugin will create refer codes for all of your users.
 
 == Screenshots ==
-1. Options page of plugin
-2. Copy link shortcode example
+1. Copy link shortcode example
+2. Options page
+3. List of shortcodes
+4. Managing referrals in User edit page
 
 == Changelog ==
 
