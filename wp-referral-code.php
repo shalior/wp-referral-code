@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       WP Referral Code
  * Plugin URI:        http://shalior.ir/wp-referral-code
- * Description:       This plugin brings referral codes to your WordPress website. many shortcodes are available and its all free
+ * Description:       This plugin brings referral marketing to your WordPress website. It's dead simple, fast, customizable, and it's all free!
  * Version:           1.4.10
  * Author:            Shalior <contact@shalior.ir>
  * Author URI:        http://shalior.ir/
