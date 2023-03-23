@@ -29,6 +29,9 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.4.10 =
+* UI enhancements.
+
 = 1.4.9 =
 * Update styles to support more themes.
 
