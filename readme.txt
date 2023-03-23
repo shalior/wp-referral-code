@@ -1,13 +1,13 @@
 === WP Referral Code ===
 Contributors: shalior
-Tags: refer code, referral marketing, refer
+Tags: referral marketing, refer, referral, affiliate, affiliate marketing
 Requires at least: 4.8
 Tested up to: 6.1
 Requires PHP: 5.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-this plugin brings referral codes to your wordpress website. many shortcodes are available and its all free
+This plugin brings referral marketing to your WordPress website. It's dead simple, fast, customizable, and it's all free!
 
 == Description ==
 WP Referral Code is a WordPress plugin that helps you generate a unique referral code for each of your users, enabling you to start your own version of referral marketing. Upon user registration, the plugin captures the refer code automatically. Additionally, WP Referral Code provides a user-friendly "copy refer link box" that allows users to easily copy and share their referral link.
