@@ -30,6 +30,10 @@ note: on activation plugin will create refer codes for all of your users.
 
 == Changelog ==
 
+= 1.4.11 =
+* Add an option to hide referral info in users table
+* Make referral counts sortable in users table
+
 = 1.4.10 =
 * UI enhancements.
 
