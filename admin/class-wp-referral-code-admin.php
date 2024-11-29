@@ -51,7 +51,6 @@ class WP_Referral_Code_Admin {
 		$this->wp_referral_code = $wp_referral_code;
 		$this->version          = $version;
 		$this->load_dependencies();
-
 	}
 
 	/**
@@ -79,5 +78,4 @@ class WP_Referral_Code_Admin {
 			);
 		}
 	}
-
 }

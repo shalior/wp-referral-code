@@ -68,7 +68,6 @@ function wp_referral_code_user_param_shortcodes_init() {
 
 		// [wp-referral-code var="valid_invited_count"]
 		return '';
-
 	}
 
 	add_shortcode( 'wp-referral-code', 'wp_referral_code_user_param' );

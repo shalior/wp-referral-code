@@ -100,11 +100,11 @@ class WP_Referral_Code {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/helpers/bootstrap.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-referral-code-admin.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-referral-code-public.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-refer-code.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/wp-referral-code-registration.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/helpers/bootstrap.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-wp-referral-code-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-wp-referral-code-public.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-refer-code.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/wp-referral-code-registration.php';
 	}
 
 	/**
@@ -170,5 +170,4 @@ class WP_Referral_Code {
 		wrc_set_cookie( $name, $refer_code, time() + $expires );
 		// phpcs:enable
 	}
-
 }

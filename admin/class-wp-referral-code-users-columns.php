@@ -14,7 +14,7 @@ class WP_Referral_Code_Users_Columns {
 
 		global $wp_referral_code_options;
 
-		if ( empty($wp_referral_code_options['show_referral_info_columns'] ) || $wp_referral_code_options['show_referral_info_columns'] === '0') {
+		if ( empty( $wp_referral_code_options['show_referral_info_columns'] ) ) {
 			return;
 		}
 

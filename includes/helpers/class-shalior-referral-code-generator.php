@@ -98,9 +98,4 @@ class Shalior_Referral_Code_Generator {
 
 		return true;
 	}
-
 }
-
-
-
-

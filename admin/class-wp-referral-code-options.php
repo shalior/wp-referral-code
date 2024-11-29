@@ -137,7 +137,6 @@ final class WP_Referral_Code_Settings {
 			)
 		);
 
-
 		add_settings_field(
 			'wp_referral_code_show_referral_info_columns', // as of WP 4.6 this value is used only internally
 			// use $args' label_for to populate the id inside the callback.
@@ -149,8 +148,7 @@ final class WP_Referral_Code_Settings {
 				'label_for' => 'show_referral_info_columns',
 				'class'     => 'wrc_row',
 			)
-			);
-
+		);
 	}
 
 	public function sanitize_callback( $data ) {
@@ -162,11 +160,11 @@ final class WP_Referral_Code_Settings {
 			return $data;
 		}
 
-		$expected_keys = array('code_length', 'register_url', 'expiration_time', 'show_referral_info_columns');
-		$data_keys = array_keys($data);
+		$expected_keys = array( 'code_length', 'register_url', 'expiration_time', 'show_referral_info_columns' );
+		$data_keys     = array_keys( $data );
 
-		// Check if $data_keys is a subset of $expected_keys
-		if (array_diff($data_keys, $expected_keys)) {
+		// Check if $data_keys is a subset of $expected_keys.
+		if ( array_diff( $data_keys, $expected_keys ) ) {
 			add_settings_error( $this->page_slug, $this->page_slug, __( 'Unknown setting!', 'wp-referral-code' ) );
 			return $this->options;
 		}
@@ -187,7 +185,7 @@ final class WP_Referral_Code_Settings {
 			$have_err = true;
 		}
 
-		// validate show cols
+		// validate show cols.
 		if ( ! isset( $data['show_referral_info_columns'] ) || ! in_array( $data['show_referral_info_columns'], array( '0', '1' ) ) ) {
 			$data['show_referral_info_columns'] = 0;
 		}
@@ -205,7 +203,7 @@ final class WP_Referral_Code_Settings {
 
 			return $data;
 		}
-		
+
 		return $this->options;
 	}
 
@@ -226,7 +224,6 @@ final class WP_Referral_Code_Settings {
 
 		require_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/wp-referral-code-admin-setting-view.php';
 	}
-
 }
 
 WP_Referral_Code_Settings::get_instance();

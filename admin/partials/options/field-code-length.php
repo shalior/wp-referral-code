@@ -1,8 +1,8 @@
 <!-- refer code length HTML -->
 <input style="padding: .3em;" type="number"
-	   id="<?php echo esc_attr( $args['label_for'] ); ?>"
-	   name="wp_referral_code_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
-	   value="<?php echo isset( $option[ $args['label_for'] ] ) ? esc_html( $option[ $args['label_for'] ] ) : 5; ?>">
+		id="<?php echo esc_attr( $args['label_for'] ); ?>"
+		name="wp_referral_code_options[<?php echo esc_attr( $args['label_for'] ); ?>]"
+		value="<?php echo isset( $option[ $args['label_for'] ] ) ? esc_html( $option[ $args['label_for'] ] ) : 5; ?>">
 
 <div style="
 	background-color: #ef4444;

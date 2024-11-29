@@ -106,7 +106,6 @@ final class Shalior_Search_User {
 
 		return self::$instance;
 	}
-
 }
 
 Shalior_Search_User::get_instance();

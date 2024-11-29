@@ -20,7 +20,5 @@ class WP_Referral_Code_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
-
 	}
-
 }

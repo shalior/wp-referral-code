@@ -61,17 +61,16 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wp-referral-code.php';
 function run_wp_referral_code() {
 
 	WP_Referral_Code::get_instance();
-
 }
 
 // gets necessary options.
 $wp_referral_code_options = get_option(
 	'wp_referral_code_options',
 	array(
-		'code_length'     => 6,
-		'register_url'    => wp_registration_url(),
-		'expiration_time' => 10,
-		'show_referral_info_columns' => '1'
+		'code_length'                => 6,
+		'register_url'               => wp_registration_url(),
+		'expiration_time'            => 10,
+		'show_referral_info_columns' => '1',
 	)
 );
 

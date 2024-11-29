@@ -42,7 +42,6 @@ class WP_Referral_Code_Public {
 		$this->wp_referral_code = $wp_referral_code;
 		$this->version          = $version;
 		$this->load_dependencies();
-
 	}
 
 	/**
@@ -53,5 +52,4 @@ class WP_Referral_Code_Public {
 	public function load_dependencies() {
 		require_once WP_REFERRAL_CODE_PATH . '/public/shortcode-wp-referral-code.php';
 	}
-
 }

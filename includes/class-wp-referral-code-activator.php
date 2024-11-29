@@ -20,5 +20,4 @@ class WP_Referral_Code_Activator {
 	public static function activate() {
 		wrc_set_ref_code_all_users( false, 6 );
 	}
-
 }

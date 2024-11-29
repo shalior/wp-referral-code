@@ -70,7 +70,6 @@ final class Shalior_Grs_User_Edit {
 				'nonceAdd'       => wp_create_nonce( 'wp_referral_code_add_user_relation_nonce' ),
 			)
 		);
-
 	}
 
 	public function update_ref_code( $user_id ) {
@@ -90,7 +89,6 @@ final class Shalior_Grs_User_Edit {
 		}
 
 		( new WP_Refer_Code( $user_id ) )->update_ref_code( $new_ref_code );
-
 	}
 
 	/**
@@ -132,7 +130,7 @@ final class Shalior_Grs_User_Edit {
 	 * @return void
 	 */
 	public function ajax_delete_user_relation() {
-		list($to_delete_user_id,$referrer_id) = $this->ajax_relation_request_validation( 'wp_referral_code_delete_user_relation_nonce' );
+		list($to_delete_user_id, $referrer_id) = $this->ajax_relation_request_validation( 'wp_referral_code_delete_user_relation_nonce' );
 
 		wp_referral_code_delete_relation( $to_delete_user_id, $referrer_id );
 		wp_send_json_success(
@@ -142,7 +140,6 @@ final class Shalior_Grs_User_Edit {
 				$to_delete_user_id,
 			)
 		);
-
 	}
 
 	public function ajax_add_user_relation() {
@@ -184,7 +181,6 @@ final class Shalior_Grs_User_Edit {
 				$to_add_user_id,
 			)
 		);
-
 	}
 
 	/**
@@ -249,7 +245,6 @@ final class Shalior_Grs_User_Edit {
 
 		return array( $user_id, $referrer_id );
 	}
-
 }
 
 Shalior_Grs_User_Edit::get_instance();

@@ -56,11 +56,9 @@ function wrc_set_ref_code_all_users( $refresh, $length ) {
 		if ( $refresh ) {
 			$ref_code = Shalior_Referral_Code_Generator::get_instance()->get_ref_code( $length );
 			update_user_meta( $user_id, 'wrc_ref_code', $ref_code );
-		} else {
-			if ( ! metadata_exists( 'user', $user_id, 'wrc_ref_code' ) ) {
+		} elseif ( ! metadata_exists( 'user', $user_id, 'wrc_ref_code' ) ) {
 				$ref_code = Shalior_Referral_Code_Generator::get_instance()->get_ref_code( $length );
 				update_user_meta( $user_id, 'wrc_ref_code', $ref_code );
-			}
 		}
 	}
 }
@@ -104,4 +102,3 @@ if ( ! function_exists( 'wrc_set_cookie' ) ) {
 		}
 	}
 }
-

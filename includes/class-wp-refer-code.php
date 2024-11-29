@@ -30,7 +30,7 @@ class WP_Refer_Code {
 	 */
 	public function __construct( $user_id ) {
 		if ( ! get_user_by( 'id', $user_id ) ) {
-			throw new RuntimeException( "User with id $user_id does'nt exists" );
+			throw new RuntimeException( esc_html( __( 'User not found.', 'wp-referral-code' ) ) );
 		}
 
 		$user_ref_code = get_user_meta( $user_id, 'wrc_ref_code', true );
@@ -83,7 +83,6 @@ class WP_Refer_Code {
 		if ( ! metadata_exists( 'user', $this->user_id, 'wrc_ref_code' ) ) {
 			update_user_meta( $this->user_id, 'wrc_ref_code', $ref_code );
 		}
-
 	}
 
 	/**
