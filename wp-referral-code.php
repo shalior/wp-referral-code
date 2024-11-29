@@ -10,7 +10,7 @@
  * Plugin Name:       WP Referral Code
  * Plugin URI:        http://shalior.ir/wp-referral-code
  * Description:       This plugin brings referral marketing to your WordPress website. It's dead simple, fast, customizable, and it's all free!
- * Version:           1.4.10
+ * Version:           1.4.11
  * Author:            Shalior <contact@shalior.ir>
  * Author URI:        http://shalior.ir/
  * License:           GPL-2.0+
@@ -26,7 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 // holds the plugin path.
 define( 'WP_REFERRAL_CODE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WP_REFERRAL_CODE_URI', plugin_dir_url( __FILE__ ) );
-define( 'WP_REFERRAL_CODE_VERSION', '1.4.10' );
+define( 'WP_REFERRAL_CODE_VERSION', '1.4.11' );
 
 /**
  * The code that runs during plugin activation.
