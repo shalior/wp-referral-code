@@ -72,6 +72,12 @@ final class WP_Referral_Code_Settings {
 		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/field-expiration-time.php';
 	}
 
+	public function field_show_referral_info_columns( $args ) {
+		$option = $this->options;
+		// include html.
+		include_once WP_REFERRAL_CODE_PATH . 'admin/partials/options/field-show-referral-info-cols.php';
+	}
+
 	public function settings_init() {
 		// register a new setting.
 		$args = array(
@@ -131,6 +137,20 @@ final class WP_Referral_Code_Settings {
 			)
 		);
 
+
+		add_settings_field(
+			'wp_referral_code_show_referral_info_columns', // as of WP 4.6 this value is used only internally
+			// use $args' label_for to populate the id inside the callback.
+			__( 'Show referral info colums', 'wp-referral-code' ),
+			array( $this, 'field_show_referral_info_columns' ),
+			$this->page_slug,
+			'wp_referral_code_section_1',
+			array(
+				'label_for' => 'show_referral_info_columns',
+				'class'     => 'wrc_row',
+			)
+			);
+
 	}
 
 	public function sanitize_callback( $data ) {
@@ -141,6 +161,16 @@ final class WP_Referral_Code_Settings {
 		if ( $this->options == $data ) {
 			return $data;
 		}
+
+		$expected_keys = array('code_length', 'register_url', 'expiration_time', 'show_referral_info_columns');
+		$data_keys = array_keys($data);
+
+		// Check if $data_keys is a subset of $expected_keys
+		if (array_diff($data_keys, $expected_keys)) {
+			add_settings_error( $this->page_slug, $this->page_slug, __( 'Unknown setting!', 'wp-referral-code' ) );
+			return $this->options;
+		}
+
 		// validate code_length.
 		if ( ! ( $data['code_length'] >= 3 && $data['code_length'] <= 10 && is_numeric( $data['code_length'] ) ) ) {
 			add_settings_error( $this->page_slug, $this->page_slug, __( 'Chose a number between 3 & 10', 'wp-referral-code' ) );
@@ -157,6 +187,11 @@ final class WP_Referral_Code_Settings {
 			$have_err = true;
 		}
 
+		// validate show cols
+		if ( ! isset( $data['show_referral_info_columns'] ) || ! in_array( $data['show_referral_info_columns'], array( '0', '1' ) ) ) {
+			$data['show_referral_info_columns'] = 0;
+		}
+
 		if ( ! $have_err ) {
 			// reset ref codes if no err found and code_length value has changed.
 			if ( $this->options['code_length'] != $data['code_length'] ) {
@@ -170,7 +205,7 @@ final class WP_Referral_Code_Settings {
 
 			return $data;
 		}
-
+		
 		return $this->options;
 	}
 

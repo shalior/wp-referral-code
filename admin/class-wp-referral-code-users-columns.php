@@ -11,6 +11,13 @@ class WP_Referral_Code_Users_Columns {
 		if ( ! is_admin() ) {
 			return;
 		}
+
+		global $wp_referral_code_options;
+
+		if ( empty($wp_referral_code_options['show_referral_info_columns'] ) || $wp_referral_code_options['show_referral_info_columns'] === '0') {
+			return;
+		}
+
 		add_action( 'load-users.php', array( $this, 'load_users_table' ) );
 	}
 
@@ -27,6 +34,8 @@ class WP_Referral_Code_Users_Columns {
 		add_filter( 'manage_users_columns', array( $this, 'add_invited_by_col' ), 100, 1 );
 
 		add_filter( 'manage_users_custom_column', array( $this, 'fill_cells' ), 100, 3 );
+		add_filter( 'manage_users_sortable_columns', array( $this, 'register_invite_count_as_sortable' ) );
+		add_action( 'pre_get_users', array( $this, 'sort_by_invite_count' ) );
 	}
 
 	public function add_invited_by_col( $cols ) {
@@ -68,6 +77,22 @@ class WP_Referral_Code_Users_Columns {
 		}
 
 		return $value;
+	}
+
+	public function register_invite_count_as_sortable( $sortable_columns ) {
+		$sortable_columns['invited_users_count'] = 'invited_users_count';
+		return $sortable_columns;
+	}
+
+	public function sort_by_invite_count( $query ) {
+		if ( ! is_admin() || ! $query->is_main_query() ) {
+			return;
+		}
+
+		if ( 'invited_users_count' === $query->get( 'orderby' ) ) {
+			$query->set( 'meta_key', 'invited_users_count' );
+			$query->set( 'orderby', 'meta_value_num' );
+		}
 	}
 }
 
