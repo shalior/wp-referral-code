@@ -63,15 +63,24 @@ function run_wp_referral_code() {
 	WP_Referral_Code::get_instance();
 }
 
+
+$default_options = array(
+	'code_length'                => 6,
+	'register_url'               => wp_registration_url(),
+	'expiration_time'            => 10,
+	'show_referral_info_columns' => '1',
+);
+
 // gets necessary options.
 $wp_referral_code_options = get_option(
 	'wp_referral_code_options',
-	array(
-		'code_length'                => 6,
-		'register_url'               => wp_registration_url(),
-		'expiration_time'            => 10,
-		'show_referral_info_columns' => '1',
-	)
+	$default_options
+);
+
+// merge default options with the saved options.
+$wp_referral_code_options = wp_parse_args(
+	$wp_referral_code_options,
+	$default_options
 );
 
 // runs the plugin.
